@@ -5,8 +5,6 @@ import co.weirddoeats.grid.Grid;
 import co.weirddoeats.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.graphics.Text;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 public class GameGrid implements Grid {
 

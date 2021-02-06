@@ -8,33 +8,22 @@ import java.io.FileInputStream;
 public class Music {
 
     private String filename;
-<<<<<<< HEAD
     private String songName;
-    private Player player;
-
-    public Music(String music){
-        songName = music;
-        filename = "resources/" + songName;
-    }
-
-    public void play(){
-=======
     private Player player;
     private int songIndex;
 
-    public Music(){
+    public Music() {
         songIndex = 0;
     }
 
-    public void play(String file){
+    public void play(String file) {
         filename = "resources/" + file;
->>>>>>> master
+        songName = file;
         try {
-            FileInputStream fis     = new FileInputStream(filename);
+            FileInputStream fis = new FileInputStream(filename);
             BufferedInputStream bis = new BufferedInputStream(fis);
             player = new Player(bis);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Problem playing file " + filename);
             System.out.println(e);
         }
@@ -42,34 +31,34 @@ public class Music {
         // run in new thread to play in background
         new Thread() {
             public void run() {
-                try { player.play(); }
-                catch (Exception e) { System.out.println(e); }
+                try {
+                    player.play();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
         }.start();
+
     }
 
-    public void stop(){
-<<<<<<< HEAD
-        player.close();
-    }
-
-    public String getSongName(){
-        return songName;
-=======
-        if(player != null){
+    public void stop() {
+        if (player != null) {
             player.close();
         }
->>>>>>> master
     }
 
-    public void playNextSong(){
+    public String getSongName() {
+        return songName;
+    }
+
+    public void playNextSong() {
         stop();
-        MusicType [] songs = MusicType.values();
+        MusicType[] songs = MusicType.values();
         int songsLength = songs.length;
 
         play(songs[songIndex].getSong());
 
-        if(songIndex < songsLength){
+        if (songIndex < songsLength) {
             songIndex++;
         }
 
