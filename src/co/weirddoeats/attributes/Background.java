@@ -1,22 +1,31 @@
 package co.weirddoeats.attributes;
 
 import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
-import co.weirddoeats.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Background {
 
-    private Picture pic;
-    private SimpleGfxGridPosition pos;
     private final int PADDING = 10;
+    private final int WIDTH = 700;
+    private final int HEIGHT = 500;
+    private Picture picture;
+    private SimpleGfxGridPosition pos;
 
-    public Background(String pic){
-        this.pic = new Picture(PADDING, PADDING, pic);
+    public Background(String picture){
+        this.picture = new Picture(WIDTH, HEIGHT);
+        this.picture.load(picture);
     }
     public void show(){
-        pic.draw();
+        picture.draw();
     }
     public void hide(){
-        pic.delete();
+        picture.delete();
+    }
+    public int getWidth(){
+        return WIDTH;
+    }
+
+    public int getHeight(){
+        return HEIGHT;
     }
 }

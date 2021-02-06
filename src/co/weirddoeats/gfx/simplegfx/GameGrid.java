@@ -9,7 +9,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class GameGrid implements Grid {
 
     public static final int PADDING = 10;
-    public final int PIXELS = 20;
+    public final int PIXELS = 15;
 
     private int cols;
     private int rows;
