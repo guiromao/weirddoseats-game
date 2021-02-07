@@ -68,7 +68,7 @@ public class KeyboardController implements KeyboardHandler {
 
         logo = new Picture();
         logo.load("logo.png");
-        logo.translate(150, -50);
+        logo.translate(160, -50);
         //logo.grow(-400, -400);
         logo.draw();
 
@@ -77,7 +77,7 @@ public class KeyboardController implements KeyboardHandler {
         welcomeText.grow(120, 10);
         //welcomeText.draw();
 
-        pressSpace = new Text(315, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
+        pressSpace = new Text(325, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
         pressSpace.setColor(Color.BLACK);
         pressSpace.grow(120, 10);
         pressSpace.draw();
