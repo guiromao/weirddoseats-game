@@ -9,7 +9,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class GameGrid implements Grid {
 
     public static final int PADDING = 10;
-    public final int PIXELS = 20;
+    public final int PIXELS = 15;
 
     private int cols;
     private int rows;
@@ -31,6 +31,8 @@ public class GameGrid implements Grid {
         board = new Rectangle(PADDING, PADDING, cols * PIXELS, rows * PIXELS);
         board.setColor(Color.BLACK);
         board.fill();
+
+        keyboard.init();
     }
 
     /**
@@ -93,15 +95,14 @@ public class GameGrid implements Grid {
      * @see Grid#makeGridPosition()
      */
     @Override
-    public GridPosition makeGridPosition() {
+    public SimpleGfxGridPosition makeGridPosition() {
         return new SimpleGfxGridPosition(this);
     }
-
     /**
      * @see Grid#makeGridPosition(int, int)
      */
     @Override
-    public GridPosition makeGridPosition(int col, int row) {
+    public SimpleGfxGridPosition makeGridPosition(int col, int row) {
         return new SimpleGfxGridPosition(col, row, this);
     }
 

@@ -9,7 +9,7 @@ public class Game {
 
     private final int PADDING = 10;
     private final int WIDTH = 40;
-    private final int HEIGHT = 40;
+    private final int HEIGHT = 20;
 
     private GameGrid gameGrid;
     private KeyboardController keyboard;
@@ -26,9 +26,7 @@ public class Game {
         //mouse.init();
 
         keyboard.init();
-        Rectangle rect = new Rectangle(100, 100, 100, 100);
-        rect.setColor(Color.WHITE);
-        rect.fill();
+
     }
 
 }
