@@ -32,7 +32,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
     }
 
     public SimpleGfxGridPosition(GameGrid grid, String picture){
-        super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
+        super((int) (Math.random() * grid.getCols() - 1), (int) (Math.random() * grid.getRows()), grid);
 
         simpleGfxGrid = grid;
 

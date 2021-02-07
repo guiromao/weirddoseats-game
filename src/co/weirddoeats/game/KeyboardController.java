@@ -90,13 +90,13 @@ public class KeyboardController implements KeyboardHandler {
         score.grow(50, 20);
         score.draw();
 
-        time = new Text(360, 40, "");
+        time = new Text(370, 40, "");
         time.setColor(Color.WHITE);
         time.grow(50, 20);
         time.setText("Time: " + timeLeft);
         time.draw();
 
-        levelText = new Text(640, 40, "Level: " + level);
+        levelText = new Text(650, 40, "Level: " + level);
         levelText.setColor(Color.WHITE);
         levelText.grow(50, 20);
         levelText.draw();
@@ -116,7 +116,7 @@ public class KeyboardController implements KeyboardHandler {
                             }
                             time.delete();
                             Thread.sleep(500);
-                            time = new Text(360, 40, "");
+                            time = new Text(370, 40, "");
                             time.setColor(Color.WHITE);
                             time.grow(50, 20);
                             time.setText("Time: " + timeLeft);
@@ -127,7 +127,7 @@ public class KeyboardController implements KeyboardHandler {
                         if (countStages % NUMBER_STAGES == 0) {
                             level++;
                             levelText.delete();
-                            levelText = new Text(640, 40, "");
+                            levelText = new Text(650, 40, "");
                             levelText.setColor(Color.WHITE);
                             levelText.grow(50, 20);
                             levelText.setText("Level: " + level);
