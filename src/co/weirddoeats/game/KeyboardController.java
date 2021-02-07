@@ -11,6 +11,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class KeyboardController implements KeyboardHandler {
 
@@ -28,6 +29,7 @@ public class KeyboardController implements KeyboardHandler {
     private int level;
     private int timeLeft;
     private int countStages;
+    private Picture logo;
 
     public KeyboardController(Player player) {
         keyboard = new Keyboard(this);
@@ -64,17 +66,22 @@ public class KeyboardController implements KeyboardHandler {
         goRight.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(goRight);
 
-        welcomeText = new Text(330, 175 + GameGrid.INFO_BOARD_HEIGHT - 50, "Welcome to WeirDDOS Eats!");
-        welcomeText.setColor(Color.WHITE);
-        welcomeText.grow(100, 30);
-        welcomeText.draw();
+        logo = new Picture();
+        logo.load("logo.png");
+        logo.translate(150, -50);
+        //logo.grow(-400, -400);
+        logo.draw();
 
-        pressSpace = new Text(315, 245 + GameGrid.INFO_BOARD_HEIGHT - 50, "Press <SPACE> to start the game! ;)");
-        pressSpace.setColor(Color.WHITE);
+        welcomeText = new Text(360, 30 + GameGrid.INFO_BOARD_HEIGHT, "Welcome to");
+        welcomeText.setColor(Color.BLACK);
+        welcomeText.grow(120, 10);
+        //welcomeText.draw();
+
+        pressSpace = new Text(315, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
+        pressSpace.setColor(Color.BLACK);
         pressSpace.grow(120, 10);
         pressSpace.draw();
 
-        levelText = new Text(315, 245 + GameGrid.INFO_BOARD_HEIGHT - 50, "Level: " + level);
     }
 
     public void initAdditional() {
@@ -89,7 +96,7 @@ public class KeyboardController implements KeyboardHandler {
         time.setText("Time: " + timeLeft);
         time.draw();
 
-        levelText = new Text(550, 40, "Level: " + level);
+        levelText = new Text(620, 40, "Level: " + level);
         levelText.setColor(Color.WHITE);
         levelText.grow(50, 20);
         levelText.draw();
@@ -150,6 +157,9 @@ public class KeyboardController implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (isOnWelcome) {
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
+                game.setBoardColor(Color.BLACK);
+                game.setInfoColor(Color.BLACK);
+                logo.delete();
                 welcomeText.delete();
                 pressSpace.delete();
                 playNextSong();

@@ -8,6 +8,8 @@ import co.weirddoeats.gfx.simplegfx.GameGrid;
 import co.weirddoeats.attributes.Building;
 import co.weirddoeats.attributes.Music;
 import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
+import co.weirddoeats.grid.GridColor;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public class Game {
 
@@ -98,6 +100,14 @@ public class Game {
 
     public Music getMusic(){
         return music;
+    }
+
+    public void setBoardColor(Color color){
+        gameGrid.getGameBoard().setColor(color);
+    }
+
+    public void setInfoColor(Color color){
+        gameGrid.getInfoBoard().setColor(color);
     }
 
 }

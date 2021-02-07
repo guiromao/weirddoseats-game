@@ -41,7 +41,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
             this.picture.grow(-103, -100);
         }
         else {
-            this.picture = new Picture((getCol()-4) * (PIXELS) + GameGrid.PADDING + 17, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING - 13, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-80, -90);
         }
 

@@ -29,11 +29,11 @@ public class GameGrid implements Grid {
     @Override
     public void init() {
         gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS, rows * PIXELS);
-        gameBoard.setColor(Color.BLACK);
+        gameBoard.setColor(Color.WHITE);
         gameBoard.fill();
 
         infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH, INFO_BOARD_HEIGHT);
-        infoBoard.setColor(Color.BLACK);
+        infoBoard.setColor(Color.WHITE);
         infoBoard.fill();
     }
 
