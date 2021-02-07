@@ -58,7 +58,7 @@ public class Music {
 
         play(songs[songIndex].getSong());
 
-        if (songIndex < songsLength) {
+        if (songIndex < (songsLength - 1)) {
             songIndex++;
         }
 

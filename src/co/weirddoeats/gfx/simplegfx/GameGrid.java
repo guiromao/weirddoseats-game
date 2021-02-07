@@ -3,6 +3,7 @@ package co.weirddoeats.gfx.simplegfx;
 import co.weirddoeats.game.KeyboardController;
 import co.weirddoeats.grid.Grid;
 import co.weirddoeats.grid.position.GridPosition;
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
@@ -28,11 +29,15 @@ public class GameGrid implements Grid {
      */
     @Override
     public void init() {
-        gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS, rows * PIXELS);
+        /*Rectangle rect = new Rectangle(0, 0, cols*PIXELS, rows*PIXELS+20 + INFO_BOARD_HEIGHT);
+        rect.setColor(Color.BLACK);
+        rect.fill();*/
+
+        gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS + 25, rows * PIXELS + 20);
         gameBoard.setColor(Color.WHITE);
         gameBoard.fill();
 
-        infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH, INFO_BOARD_HEIGHT);
+        infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH + 25, INFO_BOARD_HEIGHT);
         infoBoard.setColor(Color.WHITE);
         infoBoard.fill();
     }

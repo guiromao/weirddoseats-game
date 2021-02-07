@@ -6,7 +6,8 @@ public enum MusicType {
     THREE("action2.mp3"),
     FOUR("action3.mp3"),
     FIVE("action4.mp3"),
-    SIX("happyrock.mp3");
+    SIX("action5.mp3"),
+    SEVEN("action6.mp3");
 
     private String song;
 

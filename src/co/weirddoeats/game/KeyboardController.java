@@ -85,7 +85,7 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public void initAdditional() {
-        score = new Text(100, 40, "Score: 0");
+        score = new Text(90, 40, "Score: 0");
         score.setColor(Color.WHITE);
         score.grow(50, 20);
         score.draw();
@@ -96,7 +96,7 @@ public class KeyboardController implements KeyboardHandler {
         time.setText("Time: " + timeLeft);
         time.draw();
 
-        levelText = new Text(620, 40, "Level: " + level);
+        levelText = new Text(640, 40, "Level: " + level);
         levelText.setColor(Color.WHITE);
         levelText.grow(50, 20);
         levelText.draw();
@@ -114,22 +114,25 @@ public class KeyboardController implements KeyboardHandler {
                             if (time != null) {
                                 time.delete();
                             }
+                            time.delete();
+                            Thread.sleep(500);
                             time = new Text(360, 40, "");
                             time.setColor(Color.WHITE);
                             time.grow(50, 20);
                             time.setText("Time: " + timeLeft);
                             time.draw();
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                             timeLeft--;
                         }
                         if (countStages % NUMBER_STAGES == 0) {
                             level++;
                             levelText.delete();
-                            levelText = new Text(550, 40, "");
+                            levelText = new Text(640, 40, "");
                             levelText.setColor(Color.WHITE);
                             levelText.grow(50, 20);
                             levelText.setText("Level: " + level);
                             levelText.draw();
+                            game.getMusic().playNextSong();
                         }
                         timeLeft = TIME_STAGE_SECONDS;
                         countStages++;
@@ -166,7 +169,7 @@ public class KeyboardController implements KeyboardHandler {
                 isOnWelcome = false;
                 initAdditional();
                 game.getPlayer().getVehicle().getPosition().show();
-                //updateInfo();
+                updateInfo();
                 game.getGameObjects()[1].getPosition().show();
             }
         } else if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP || keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN ||
