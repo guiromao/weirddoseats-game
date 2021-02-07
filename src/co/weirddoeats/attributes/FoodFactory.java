@@ -4,12 +4,16 @@ import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 
 public class FoodFactory {
 
-    private final String [] name = {"sandwiches", "prawns à guilho", "steak, rice, chips and egg", "sushi", "chef dish", "astronaut food"};
-    private final String [] pictures = {"skate.png", "bike.png", "motorbike.png", "car.png", "ferrari.png", "spaceshuttle.png"};
+    private static final String [] name = {"sandwiches", "prawns à guilho", "steak, rice, chips and egg", "sushi", "chef dish", "astronaut food"};
+    private static final String [] pictures = {"skate.png", "bike.png", "motorbike.png", "car.png", "ferrari.png", "spaceshuttle.png"};
 
-    public Vehicle generateFood(int level, Building building){
+    public static Food generateFood(int level, Building building){
 
+        SimpleGfxGridPosition foodPos = building.getPosition();
+        foodPos.setPos(foodPos.getCol() + 1, foodPos.getRow());
 
-        return null;//new Food(name[level], pictures[level]);
+        return new Food(name[level], pictures[level], foodPos);
     }
+
+
 }

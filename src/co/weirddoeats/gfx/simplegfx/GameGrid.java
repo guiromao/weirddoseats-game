@@ -9,12 +9,14 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class GameGrid implements Grid {
 
     public static final int PADDING = 10;
-    public final int PIXELS = 15;
+    public static final int INFO_BOARD_WIDTH = 25 * 30;
+    public static final int INFO_BOARD_HEIGHT = 80;
+    public static final int PIXELS = 30;
 
     private int cols;
     private int rows;
-    private Rectangle board;
-    private KeyboardController keyboard;
+    private Rectangle gameBoard;
+    private Rectangle infoBoard;
 
     public GameGrid(int cols, int rows){
         this.cols = cols;
@@ -26,13 +28,13 @@ public class GameGrid implements Grid {
      */
     @Override
     public void init() {
-        keyboard = new KeyboardController();
+        gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS, rows * PIXELS);
+        gameBoard.setColor(Color.BLACK);
+        gameBoard.fill();
 
-        board = new Rectangle(PADDING, PADDING, cols * PIXELS, rows * PIXELS);
-        board.setColor(Color.BLACK);
-        board.fill();
-
-        keyboard.init();
+        infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH, INFO_BOARD_HEIGHT);
+        infoBoard.setColor(Color.BLACK);
+        infoBoard.fill();
     }
 
     /**
@@ -72,7 +74,7 @@ public class GameGrid implements Grid {
      * @return the x position of the grid
      */
     public int getX() {
-        return (board.getX());
+        return (gameBoard.getX());
     }
 
     /**
@@ -80,7 +82,7 @@ public class GameGrid implements Grid {
      * @return the y position of the grid
      */
     public int getY() {
-        return (board.getY());
+        return (gameBoard.getY());
     }
 
     /**
@@ -98,12 +100,24 @@ public class GameGrid implements Grid {
     public SimpleGfxGridPosition makeGridPosition() {
         return new SimpleGfxGridPosition(this);
     }
+
+    public SimpleGfxGridPosition makeGridPosition(String picture) {
+        return new SimpleGfxGridPosition(this, picture);
+    }
     /**
      * @see Grid#makeGridPosition(int, int)
      */
     @Override
     public SimpleGfxGridPosition makeGridPosition(int col, int row) {
         return new SimpleGfxGridPosition(col, row, this);
+    }
+
+    public Rectangle getGameBoard(){
+        return gameBoard;
+    }
+
+    public Rectangle getInfoBoard(){
+        return infoBoard;
     }
 
     /**
