@@ -18,6 +18,7 @@ public class GameGrid implements Grid {
     private int rows;
     private Rectangle gameBoard;
     private Rectangle infoBoard;
+    private Rectangle borderRectangle;
 
     public GameGrid(int cols, int rows){
         this.cols = cols;
@@ -29,15 +30,15 @@ public class GameGrid implements Grid {
      */
     @Override
     public void init() {
-        /*Rectangle rect = new Rectangle(0, 0, cols*PIXELS, rows*PIXELS+20 + INFO_BOARD_HEIGHT);
-        rect.setColor(Color.BLACK);
-        rect.fill();*/
+        /*borderRectangle = new Rectangle(PADDING, 0, cols*PIXELS, rows*PIXELS+25 + INFO_BOARD_HEIGHT);
+        borderRectangle.setColor(Color.BLACK);
+        borderRectangle.fill();*/
 
-        gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS + 25, rows * PIXELS + 20);
+        gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS +25, rows * PIXELS + 20);
         gameBoard.setColor(Color.WHITE);
         gameBoard.fill();
 
-        infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH + 25, INFO_BOARD_HEIGHT);
+        infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH+25, INFO_BOARD_HEIGHT);
         infoBoard.setColor(Color.WHITE);
         infoBoard.fill();
     }
@@ -123,6 +124,10 @@ public class GameGrid implements Grid {
 
     public Rectangle getInfoBoard(){
         return infoBoard;
+    }
+
+    public Rectangle getBorderRectangle(){
+        return borderRectangle;
     }
 
     /**
