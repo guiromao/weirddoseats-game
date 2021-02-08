@@ -59,6 +59,9 @@ public class Vehicle {
     public int getHeight(){
         return HEIGHT;
     }
+    public String getName(){
+        return name;
+    }
 
     public void setPicture(String picture){
         this.position.setPicture(picture);

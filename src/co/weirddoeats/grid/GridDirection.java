@@ -4,10 +4,20 @@ package co.weirddoeats.grid;
  * The directions in which positions may move
  */
 public enum GridDirection {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT;
+    UP("up"),
+    DOWN("down"),
+    LEFT("left"),
+    RIGHT("right");
+
+    private String direction;
+
+     GridDirection(String direction){
+        this.direction = direction;
+
+    }
+    public String getDirection() {
+        return direction;
+    }
 
     /**
      * Detects if two directions are opposite

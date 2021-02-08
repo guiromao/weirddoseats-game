@@ -10,6 +10,7 @@ public class Music {
     private String filename;
     private String songName;
     private Player player;
+    private Player soundPlayer;
     private int songIndex;
 
     public Music() {
@@ -62,6 +63,29 @@ public class Music {
             songIndex++;
         }
 
+    }
+
+    public void playSound(String sound){
+        String file = "resources/" + sound;
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            soundPlayer = new Player(bis);
+        } catch (Exception e) {
+            System.out.println("Problem playing file " + file);
+            System.out.println(e);
+        }
+
+        // run in new thread to play in background
+        new Thread() {
+            public void run() {
+                try {
+                    soundPlayer.play();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        }.start();
     }
 
 }
