@@ -173,6 +173,10 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         picture.translate((-PIXELS * (maxRowsLeft)), 0);
     }
 
+    public void setPicture(String pic){
+        picture.load(pic);
+    }
+
 
     /**
      * @see AbstractGridPosition#setColor(GridColor)

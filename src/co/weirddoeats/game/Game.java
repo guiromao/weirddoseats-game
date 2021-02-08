@@ -14,8 +14,8 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 public class Game {
 
     private final int PADDING = 10;
-    private final int WIDTH = 25;
-    private final int HEIGHT = 15;
+    private final int WIDTH = 35;
+    private final int HEIGHT = 17;
     private int level;
     private int score;
     private GameGrid gameGrid;

@@ -51,12 +51,17 @@ public class Vehicle {
         return speed;
     }
 
+
     public void setPosition(SimpleGfxGridPosition pos){
         position = pos;
     }
 
     public int getHeight(){
         return HEIGHT;
+    }
+
+    public void setPicture(String picture){
+        this.position.setPicture(picture);
     }
 
 }

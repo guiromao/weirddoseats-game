@@ -48,4 +48,6 @@ public class Player extends GameObject {
     public SimpleGfxGridPosition getPosition() {
         return vehicle.getPosition();
     }
+
+    publ
 }
