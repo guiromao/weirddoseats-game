@@ -37,15 +37,15 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         simpleGfxGrid = grid;
 
         if(picture.contains("building")){
-            this.picture = new Picture((getCol()-4) * (PIXELS) + GameGrid.PADDING + 7, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING - 10, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-103, -100);
         }
         else {
-            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING - 13, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING - 3, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-80, -90);
         }
 
-        rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING + GameGrid.INFO_BOARD_HEIGHT, PIXELS, PIXELS);
+        rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING + GameGrid.PADDING + 0, getRow() * PIXELS + GameGrid.PADDING + GameGrid.INFO_BOARD_HEIGHT, PIXELS, PIXELS);
         rectangle.setColor(Color.WHITE);
 
         setPos(getCol(), getRow());
