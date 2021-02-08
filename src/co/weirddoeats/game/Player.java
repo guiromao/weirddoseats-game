@@ -29,6 +29,7 @@ public class Player extends GameObject {
     }
 
     public void moveInDirection(GridDirection direction){
+        vehicle.setPicture(vehicle.getName() + "_" + direction.getDirection() + ".png");
         vehicle.getPosition().moveInDirection(direction, vehicle.getSpeed());
     }
 
@@ -49,5 +50,6 @@ public class Player extends GameObject {
         return vehicle.getPosition();
     }
 
-    publ
+
+
 }
