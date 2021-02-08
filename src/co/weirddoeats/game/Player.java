@@ -49,5 +49,7 @@ public class Player extends GameObject {
         return vehicle.getPosition();
     }
 
-    publ
+    public void setScore(int score){
+        this.score = score;
+    }
 }

@@ -1,16 +1,14 @@
 package co.weirddoeats.gfx.simplegfx;
 
-import co.weirddoeats.game.KeyboardController;
 import co.weirddoeats.grid.Grid;
 import co.weirddoeats.grid.position.GridPosition;
-import org.academiadecodigo.simplegraphics.graphics.Canvas;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class GameGrid implements Grid {
 
     public static final int PADDING = 10;
-    public static final int INFO_BOARD_WIDTH = 25 * 30;
+    public static final int INFO_BOARD_WIDTH = 35 * 30;
     public static final int INFO_BOARD_HEIGHT = 80;
     public static final int PIXELS = 30;
 
@@ -118,6 +116,11 @@ public class GameGrid implements Grid {
         return new SimpleGfxGridPosition(col, row, this);
     }
 
+
+    public SimpleGfxGridPosition makeGridPosition(int col, int row, String pic) {
+        return new SimpleGfxGridPosition(col, row, this, pic);
+    }
+
     public Rectangle getGameBoard(){
         return gameBoard;
     }
@@ -146,5 +149,9 @@ public class GameGrid implements Grid {
      */
     public int columnToX(int column) {
         return (column * PIXELS);
+    }
+
+    public SimpleGfxGridPosition makeGridPosition(int col, int row, String picture, boolean b) {
+        return new SimpleGfxGridPosition(col, row, this, picture, b);
     }
 }

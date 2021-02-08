@@ -3,6 +3,7 @@ package co.weirddoeats.game;
 import co.weirddoeats.attributes.GameObject;
 import co.weirddoeats.attributes.Music;
 import co.weirddoeats.gfx.simplegfx.GameGrid;
+import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 import co.weirddoeats.grid.GridDirection;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -26,17 +27,18 @@ public class KeyboardController implements KeyboardHandler {
     private Text time;
     private Text score;
     private Text levelText;
-    private int level;
     private int timeLeft;
     private int countStages;
+    boolean isGoal;
     private Picture logo;
 
-    public KeyboardController(Player player) {
+    public KeyboardController(Game game) {
         keyboard = new Keyboard(this);
+        this.game= game;
         isOnWelcome = true;
         timeLeft = TIME_STAGE_SECONDS;
-        level = 1;
         countStages = 1;
+        isGoal = false;
     }
 
     public void init() {
@@ -68,16 +70,16 @@ public class KeyboardController implements KeyboardHandler {
 
         logo = new Picture();
         logo.load("logo.png");
-        logo.translate(160, -50);
+        logo.translate(300, -50);
         //logo.grow(-400, -400);
         logo.draw();
 
-        welcomeText = new Text(360, 30 + GameGrid.INFO_BOARD_HEIGHT, "Welcome to");
+        welcomeText = new Text(330, 30 + GameGrid.INFO_BOARD_HEIGHT, "Welcome to");
         welcomeText.setColor(Color.BLACK);
         welcomeText.grow(120, 10);
         //welcomeText.draw();
 
-        pressSpace = new Text(325, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
+        pressSpace = new Text(465, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
         pressSpace.setColor(Color.BLACK);
         pressSpace.grow(120, 10);
         pressSpace.draw();
@@ -85,18 +87,18 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public void initAdditional() {
-        score = new Text(90, 40, "Score: 0");
+        score = new Text(130, 40, "Score: 0");
         score.setColor(Color.WHITE);
         score.grow(50, 20);
         score.draw();
 
-        time = new Text(370, 40, "");
+        time = new Text(510, 40, "");
         time.setColor(Color.WHITE);
         time.grow(50, 20);
         time.setText("Time: " + timeLeft);
         time.draw();
 
-        levelText = new Text(650, 40, "Level: " + level);
+        levelText = new Text(900, 40, "Level: " + game.getLevel());
         levelText.setColor(Color.WHITE);
         levelText.grow(50, 20);
         levelText.draw();
@@ -116,7 +118,7 @@ public class KeyboardController implements KeyboardHandler {
                             }
                             time.delete();
                             Thread.sleep(500);
-                            time = new Text(370, 40, "");
+                            time = new Text(510, 40, "");
                             time.setColor(Color.WHITE);
                             time.grow(50, 20);
                             time.setText("Time: " + timeLeft);
@@ -125,12 +127,11 @@ public class KeyboardController implements KeyboardHandler {
                             timeLeft--;
                         }
                         if (countStages % NUMBER_STAGES == 0) {
-                            level++;
                             levelText.delete();
-                            levelText = new Text(650, 40, "");
+                            levelText = new Text(900, 40, "");
                             levelText.setColor(Color.WHITE);
                             levelText.grow(50, 20);
-                            levelText.setText("Level: " + level);
+                            levelText.setText("Level: " + game.getLevel());
                             levelText.draw();
                             game.getMusic().playNextSong();
                         }
@@ -149,7 +150,7 @@ public class KeyboardController implements KeyboardHandler {
 
     public void updateScore(int scoreDone) {
         score.delete();
-        score = new Text(100, 40, "");
+        score = new Text(130, 40, "");
         score.setColor(Color.WHITE);
         score.grow(50, 20);
         score.setText("Score: " + scoreDone);
@@ -171,6 +172,8 @@ public class KeyboardController implements KeyboardHandler {
                 game.getPlayer().getVehicle().getPosition().show();
                 updateInfo();
                 game.getGameObjects()[1].getPosition().show();
+                game.getGameObjects()[3].getPosition().show();
+
             }
         } else if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP || keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN ||
                 keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT || keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
@@ -192,6 +195,13 @@ public class KeyboardController implements KeyboardHandler {
                             break;
                     }
                     game.getPlayer().moveInDirection(direction);
+                    if(gotFood(game.getPlayer().getPosition()) && !isGoal){
+                        System.out.println("Player found food!");
+                        pickedFood();
+                    }
+                    else if(arrivedGoal(game.getPlayer().getPosition()) && isGoal){
+                        didGoal();
+                    }
                 }
             }
         }
@@ -200,6 +210,34 @@ public class KeyboardController implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
+    }
+
+    public void didGoal(){
+        game.getGameObjects()[2].getPosition().hide();
+        game.getGamePositions()[1].getPosition().hide();
+        game.generateNewCoordinates();
+        game.getGameObjects()[1].getPosition().show();
+        game.getGameObjects()[3].getPosition().show();
+
+        isGoal = false;
+    }
+
+    public void pickedFood(){
+        game.getGameObjects()[1].getPosition().hide();
+        game.getGameObjects()[3].getPosition().hide();
+        game.getGameObjects()[2].getPosition().show();
+        game.getGamePositions()[1].getPosition().show();
+        isGoal = true;
+    }
+
+    public boolean arrivedGoal(SimpleGfxGridPosition pos){
+        return (pos.getRow() == game.getGamePositions()[1].getPosition().getRow() &&
+                pos.getCol() == game.getGamePositions()[1].getPosition().getCol());
+    }
+
+    public boolean gotFood(SimpleGfxGridPosition pos){
+        return (pos.getRow() == game.getGamePositions()[0].getPosition().getRow() &&
+                pos.getCol() == game.getGamePositions()[0].getPosition().getCol());
     }
 
     public void playNextSong() {

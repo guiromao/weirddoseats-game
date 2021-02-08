@@ -1,8 +1,6 @@
 package co.weirddoeats.attributes;
 
 import co.weirddoeats.gfx.simplegfx.GameGrid;
-import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class BuildingFactory {
 

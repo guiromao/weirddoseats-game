@@ -19,25 +19,17 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
     private Rectangle rectangle;
     private GameGrid simpleGfxGrid;
 
-
-    /**
-     * Simple graphics position constructor
-     * @param grid Simple graphics grid
-     */
-
     public SimpleGfxGridPosition(GameGrid grid){
         super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
-
-
     }
 
     public SimpleGfxGridPosition(GameGrid grid, String picture){
-        super((int) (Math.random() * grid.getCols() - 1), (int) (Math.random() * grid.getRows()), grid);
+        super((int) (Math.random() * grid.getCols() - 2), (int) (Math.random() * grid.getRows()), grid);
 
         simpleGfxGrid = grid;
 
         if(picture.contains("building")){
-            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING - 10, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING + 8, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-103, -100);
         }
         else {
@@ -53,20 +45,48 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         this.picture.delete();
     }
 
+    public SimpleGfxGridPosition(int col, int row, GameGrid grid){
+        super(col, row, grid);
+
+    }
+
     /**
      * Simple graphics position constructor
      * @param col position column
      * @param row position row
      * @param grid Simple graphics grid
      */
-    public SimpleGfxGridPosition(int col, int row, GameGrid grid){
+    public SimpleGfxGridPosition(int col, int row, GameGrid grid, String picture){
         super(col, row, grid);
 
         simpleGfxGrid = grid;
 
+        rectangle = new Rectangle(col * PIXELS + GameGrid.PADDING + GameGrid.PADDING + 0, row * PIXELS + GameGrid.PADDING + GameGrid.INFO_BOARD_HEIGHT, PIXELS, PIXELS);
+        rectangle.setColor(Color.WHITE);
+
         //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
 
-        setPos(getCol(),getRow());
+        this.picture = new Picture((col-4) * (PIXELS) + GameGrid.PADDING +16, (row-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        this.picture.grow(-105, -105);
+
+        setPos(col,row);
+        hide();
+    }
+
+    public SimpleGfxGridPosition(int col, int row, GameGrid grid, String picture, boolean b){
+        super(col, row, grid);
+
+        simpleGfxGrid = grid;
+
+        rectangle = new Rectangle(col * PIXELS + GameGrid.PADDING + GameGrid.PADDING + 0, row * PIXELS + GameGrid.PADDING + GameGrid.INFO_BOARD_HEIGHT, PIXELS, PIXELS);
+        rectangle.setColor(Color.WHITE);
+
+        //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
+        this.picture = new Picture((col-8) * (PIXELS) + GameGrid.PADDING + 3, (row-6) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        this.picture.grow(-230, -170);
+
+        setPos(col+1,row);
+        hide();
     }
 
     /**
@@ -109,7 +129,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
                 moveLeftRect(distance);
                 break;
         }
-        System.out.println("Moved to Row: " +getRow() + ". And Col: " + getCol() + ". Width: " + picture.getWidth() + ". Height: " + picture.getHeight());
+        System.out.println("Moved to Row: " + getRow() + ". And Col: " + getCol() + ". Width: " + picture.getWidth() + ". Height: " + picture.getHeight());
     }
 
     public void moveUpRect(int dist) {

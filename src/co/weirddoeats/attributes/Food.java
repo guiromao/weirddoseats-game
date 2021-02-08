@@ -1,23 +1,29 @@
 package co.weirddoeats.attributes;
 
+import co.weirddoeats.gfx.simplegfx.GameGrid;
 import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import javax.swing.text.Position;
 
-public class Food {
+public class Food extends GameObject{
 
     private String name;
     private Picture picture;
     private SimpleGfxGridPosition pos;
 
     // Food Constructor
-    public Food(String name,String picture, SimpleGfxGridPosition pos){
+    public Food(String name,String picture, SimpleGfxGridPosition pos, GameGrid grid){
         this.name = name;
         this.picture = new Picture(10,10);
         this.picture.load(picture);
-        this.pos = pos;
+        this.pos = grid.makeGridPosition(pos.getCol() + 1, pos.getRow(), picture);
     }
+
+    public Food(){
+
+    }
+
     // Return food name
     public String getName() {
         return name;
