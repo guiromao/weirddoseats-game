@@ -218,7 +218,7 @@ public class KeyboardController implements KeyboardHandler {
         game.generateNewCoordinates();
         game.getGameObjects()[1].getPosition().show();
         game.getGameObjects()[3].getPosition().show();
-
+        game.getMusic().playSound("winsynth.wav");
         isGoal = false;
     }
 
@@ -227,6 +227,7 @@ public class KeyboardController implements KeyboardHandler {
         game.getGameObjects()[3].getPosition().hide();
         game.getGameObjects()[2].getPosition().show();
         game.getGamePositions()[1].getPosition().show();
+        game.getMusic().playSound("powerup.wav");
         isGoal = true;
     }
 
