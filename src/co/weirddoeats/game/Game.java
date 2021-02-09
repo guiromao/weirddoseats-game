@@ -20,12 +20,14 @@ public class Game {
     private Music music;
     private GamePosition [] positions;
     private Goal goal;
+    private int timesDelivered;
 
     public Game(){
         gameGrid = new GameGrid(WIDTH, HEIGHT);
         this.player = new Player(VehicleFactory.generateVehicle(level, gameGrid));
         keyboard = new KeyboardController(this);
         level = 0;
+        timesDelivered = 0;
         music = new Music();
         positions = new GamePosition[2];
         gameObjects = new GameObject[4];
@@ -96,6 +98,11 @@ public class Game {
         }
     }
 
+    public void upgradeLevel() {
+        level++;
+
+    }
+
     public Player getPlayer(){
         return player;
     }
@@ -116,6 +123,10 @@ public class Game {
         return (level + 1);
     }
 
+    public int getTimesDelivered(){
+        return timesDelivered;
+    }
+
     public Goal getGoal(){
         return goal;
     }
@@ -128,4 +139,7 @@ public class Game {
         gameGrid.getInfoBoard().setColor(color);
     }
 
+    public void setTimesDelivered(int number){
+        timesDelivered = number;
+    }
 }

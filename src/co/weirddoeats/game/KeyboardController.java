@@ -127,13 +127,7 @@ public class KeyboardController implements KeyboardHandler {
                             timeLeft--;
                         }
                         if (countStages % NUMBER_STAGES == 0) {
-                            levelText.delete();
-                            levelText = new Text(900, 40, "");
-                            levelText.setColor(Color.WHITE);
-                            levelText.grow(50, 20);
-                            levelText.setText("Level: " + game.getLevel());
-                            levelText.draw();
-                            game.getMusic().playNextSong();
+
                         }
                         timeLeft = TIME_STAGE_SECONDS;
                         countStages++;
@@ -146,6 +140,16 @@ public class KeyboardController implements KeyboardHandler {
 
             }
         }.start();
+    }
+
+    private void updateLevel(){
+        levelText.delete();
+        levelText = new Text(900, 40, "");
+        levelText.setColor(Color.WHITE);
+        levelText.grow(50, 20);
+        levelText.setText("Level: " + game.getLevel());
+        levelText.draw();
+        game.getMusic().playNextSong();
     }
 
     public void updateScore(int scoreDone) {
@@ -220,6 +224,14 @@ public class KeyboardController implements KeyboardHandler {
         game.getGameObjects()[3].getPosition().show();
         game.getMusic().playSound("winsynth.wav");
         isGoal = false;
+
+        int numberDelivered = game.getTimesDelivered() + 1;
+        game.setTimesDelivered(numberDelivered);
+
+        if(numberDelivered % NUMBER_STAGES == 0){
+            game.upgradeLevel();
+            updateLevel();
+        }
     }
 
     public void pickedFood(){
