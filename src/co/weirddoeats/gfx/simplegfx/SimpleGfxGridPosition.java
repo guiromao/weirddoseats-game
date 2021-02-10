@@ -189,7 +189,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
     }
 
     public void moveUpRect(int dist, Game game, boolean isGoal) {
-        int maxRowsUp;git
+        int maxRowsUp;
 
         if (getRow() - dist < 0) {
             maxRowsUp = getRow();
