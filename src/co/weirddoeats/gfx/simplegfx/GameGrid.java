@@ -8,7 +8,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class GameGrid implements Grid {
 
     public static final int PADDING = 10;
-    public static final int INFO_BOARD_WIDTH = 35 * 30;
+    public static final int INFO_BOARD_WIDTH = 35 * 30 + 25;
     public static final int INFO_BOARD_HEIGHT = 80;
     public static final int PIXELS = 30;
 
@@ -36,7 +36,7 @@ public class GameGrid implements Grid {
         gameBoard.setColor(Color.WHITE);
         gameBoard.fill();
 
-        infoBoard = new Rectangle(PADDING, PADDING, INFO_BOARD_WIDTH+25, INFO_BOARD_HEIGHT);
+        infoBoard = new Rectangle(PADDING, PADDING, cols * PIXELS + 25, INFO_BOARD_HEIGHT);
         infoBoard.setColor(Color.WHITE);
         infoBoard.fill();
     }

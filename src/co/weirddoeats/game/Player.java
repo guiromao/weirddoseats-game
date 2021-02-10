@@ -28,9 +28,9 @@ public class Player extends GameObject {
         isShown = false;
     }
 
-    public void moveInDirection(GridDirection direction){
+    public void moveInDirection(GridDirection direction, Game game, boolean isGoal){
         vehicle.setPicture(vehicle.getName() + "_" + direction.getDirection() + ".png");
-        vehicle.getPosition().moveInDirection(direction, vehicle.getSpeed());
+        vehicle.getPosition().moveInDirection(direction, vehicle.getSpeed(), game, isGoal);
     }
 
     public Vehicle getVehicle(){

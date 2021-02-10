@@ -1,11 +1,14 @@
 package co.weirddoeats.gfx.simplegfx;
 
+import co.weirddoeats.game.Game;
+import co.weirddoeats.game.GamePosition;
 import co.weirddoeats.grid.GridColor;
 import co.weirddoeats.grid.GridDirection;
 import co.weirddoeats.grid.position.AbstractGridPosition;
 import co.weirddoeats.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
@@ -19,21 +22,20 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
     private Rectangle rectangle;
     private GameGrid simpleGfxGrid;
 
-    public SimpleGfxGridPosition(GameGrid grid){
+    public SimpleGfxGridPosition(GameGrid grid) {
         super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
     }
 
-    public SimpleGfxGridPosition(GameGrid grid, String picture){
+    public SimpleGfxGridPosition(GameGrid grid, String picture) {
         super((int) (Math.random() * grid.getCols() - 2), (int) (Math.random() * grid.getRows()), grid);
 
         simpleGfxGrid = grid;
 
-        if(picture.contains("building")){
-            this.picture = new Picture((getCol()-3) * (PIXELS) + GameGrid.PADDING + 8, (getRow()-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        if (picture.contains("building")) {
+            this.picture = new Picture((getCol() - 3) * (PIXELS) + GameGrid.PADDING + 8, (getRow() - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-103, -100);
-        }
-        else {
-            this.picture = new Picture((getCol()-4) * (PIXELS) + GameGrid.PADDING - 5, (getRow()-4) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        } else {
+            this.picture = new Picture((getCol() - 4) * (PIXELS) + GameGrid.PADDING - 5, (getRow() - 4) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-120, -120);
         }
 
@@ -45,18 +47,19 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         this.picture.delete();
     }
 
-    public SimpleGfxGridPosition(int col, int row, GameGrid grid){
+    public SimpleGfxGridPosition(int col, int row, GameGrid grid) {
         super(col, row, grid);
 
     }
 
     /**
      * Simple graphics position constructor
-     * @param col position column
-     * @param row position row
+     *
+     * @param col  position column
+     * @param row  position row
      * @param grid Simple graphics grid
      */
-    public SimpleGfxGridPosition(int col, int row, GameGrid grid, String picture){
+    public SimpleGfxGridPosition(int col, int row, GameGrid grid, String picture) {
         super(col, row, grid);
 
         simpleGfxGrid = grid;
@@ -66,14 +69,14 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
 
         //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
 
-        this.picture = new Picture((col-4) * (PIXELS) + GameGrid.PADDING +16, (row-3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        this.picture = new Picture((col - 4) * (PIXELS) + GameGrid.PADDING + 16, (row - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
         this.picture.grow(-105, -105);
 
-        setPos(col,row);
+        setPos(col, row);
         hide();
     }
 
-    public SimpleGfxGridPosition(int col, int row, GameGrid grid, String picture, boolean b){
+    public SimpleGfxGridPosition(int col, int row, GameGrid grid, String picture, boolean b) {
         super(col, row, grid);
 
         simpleGfxGrid = grid;
@@ -82,10 +85,10 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         rectangle.setColor(Color.WHITE);
 
         //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
-        this.picture = new Picture((col-8) * (PIXELS) + GameGrid.PADDING + 3, (row-6) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        this.picture = new Picture((col - 8) * (PIXELS) + GameGrid.PADDING + 3, (row - 6) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
         this.picture.grow(-230, -170);
 
-        setPos(col+1,row);
+        setPos(col + 1, row);
         hide();
     }
 
@@ -111,28 +114,81 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      * @see GridPosition#moveInDirection(GridDirection, int)
      */
     @Override
-    public void moveInDirection(GridDirection direction, int distance) {
-        switch (direction){
+    public void moveInDirection(GridDirection direction, int distance, Game game, boolean isGoal) {
+        switch (direction) {
             case UP:
-                moveUpRect(distance);
+                moveUpRect(distance, game, isGoal);
                 break;
 
             case DOWN:
-                moveDownRect(distance);
+                moveDownRect(distance, game, isGoal);
                 break;
 
             case RIGHT:
-                moveRightRect(distance);
+                moveRightRect(distance, game, isGoal);
                 break;
 
             case LEFT:
-                moveLeftRect(distance);
+                moveLeftRect(distance, game, isGoal);
                 break;
         }
         System.out.println("Moved to Row: " + getRow() + ". And Col: " + getCol() + ". Width: " + picture.getWidth() + ". Height: " + picture.getHeight());
     }
 
-    public void moveUpRect(int dist) {
+    public void checkHorizontally(int moveCols, Game game, boolean isGoal) {
+
+        GamePosition[] positions = game.getGamePositions();
+
+        for (int i = 1; i <= Math.abs(moveCols); i++) {
+            System.out.println("Passing on " + (getCol() + 1) + ", " + (getRow()) + " and Food is in " + positions[2].getPosition().getCol() + ", " +
+                    positions[2].getPosition().getRow());
+
+            if (!isGoal) {
+
+                if ((getCol() + i) == positions[2].getPosition().getCol()
+                        && (getRow()) == positions[2].getPosition().getRow()) {
+                    System.out.println("Passed by FOOD!");
+                    game.pickFood();
+                }
+            } else if ((getCol() + i) == positions[3].getPosition().getCol()
+                    && (getRow()) == positions[3].getPosition().getRow()) {
+                System.out.println("Passed by GOAL!");
+                game.arrivedToGoal();
+            }
+        }
+
+        setPos(getCol() + moveCols, getRow());
+        rectangle.translate((PIXELS * moveCols), 0);
+        picture.translate((PIXELS * moveCols), 0);
+    }
+
+    public void checkVertically(int moveRows, Game game, boolean isGoal) {
+
+        GamePosition[] positions = game.getGamePositions();
+
+        for (int i = 1; i <= Math.abs(moveRows); i++) {
+            System.out.println("Passing on " + getCol() + ", " + (getRow() + i) + " and Food is in " + positions[2].getPosition().getCol() + ", " +
+                    positions[2].getPosition().getRow());
+            if (!isGoal) {
+
+                if ((getCol()) == positions[2].getPosition().getCol()
+                        && (getRow() + i) == positions[2].getPosition().getRow()) {
+                    System.out.println("Passed by FOOD!");
+                    game.pickFood();
+                }
+            } else if ((getCol()) == positions[3].getPosition().getCol()
+                    && (getRow() + i) == positions[3].getPosition().getRow()) {
+                System.out.println("Passed by GOAL!");
+                game.arrivedToGoal();
+            }
+        }
+
+        setPos(getCol(), getRow() + moveRows);
+        rectangle.translate(0, (PIXELS * moveRows));
+        picture.translate(0, (PIXELS * moveRows));
+    }
+
+    public void moveUpRect(int dist, Game game, boolean isGoal) {
         int maxRowsUp;
 
         if (getRow() - dist < 0) {
@@ -141,59 +197,62 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
             maxRowsUp = dist;
         }
 
-        setPos(getCol(), (getRow() - maxRowsUp));
+        checkVertically((-maxRowsUp), game, isGoal);
+        /*setPos(getCol(), (getRow() - maxRowsUp));
         rectangle.translate(0, (-PIXELS * (maxRowsUp)));
-        picture.translate(0, (-PIXELS * (maxRowsUp)));
+        picture.translate(0, (-PIXELS * (maxRowsUp)));*/
     }
 
-    public void moveDownRect(int dist){
+    public void moveDownRect(int dist, Game game, boolean isGoal) {
         int maxRowsDown;
 
-        if(getRow() + dist >= getGrid().getRows()){
+        if (getRow() + dist >= getGrid().getRows()) {
             maxRowsDown = getGrid().getRows() - 1 - getRow();
-        }
-        else {
+        } else {
             maxRowsDown = dist;
         }
 
-        setPos(getCol(), (getRow() + maxRowsDown));
+        checkVertically(maxRowsDown, game, isGoal);
+        /*setPos(getCol(), (getRow() + maxRowsDown));
         rectangle.translate(0, (PIXELS * (maxRowsDown)));
-        picture.translate(0, (PIXELS * (maxRowsDown)));
+        picture.translate(0, (PIXELS * (maxRowsDown)));*/
 
     }
 
-    public void moveRightRect(int dist){
+    public void moveRightRect(int dist, Game game, boolean isGoal) {
         int maxRowsRight;
 
-        if(getCol() + dist >= getGrid().getCols()){
+        if (getCol() + dist >= getGrid().getCols()) {
             maxRowsRight = getGrid().getCols() - 1 - getCol();
-        }
-        else {
+        } else {
             maxRowsRight = dist;
         }
 
+        checkHorizontally(maxRowsRight, game, isGoal);
+        /*
         setPos((getCol() + maxRowsRight), getRow());
         rectangle.translate(PIXELS * (maxRowsRight), 0);
-        picture.translate(PIXELS * (maxRowsRight), 0);
+        picture.translate(PIXELS * (maxRowsRight), 0);*/
     }
 
-    public void moveLeftRect(int dist){
+    public void moveLeftRect(int dist, Game game, boolean isGoal) {
 
         int maxRowsLeft;
 
-        if(getCol() - dist < 0){
+        if (getCol() - dist < 0) {
             maxRowsLeft = getCol();
-        }
-        else {
+        } else {
             maxRowsLeft = dist;
         }
 
+        checkHorizontally((-maxRowsLeft), game, isGoal);
+        /*
         setPos((getCol() - maxRowsLeft), getRow());
         rectangle.translate((-PIXELS * (maxRowsLeft)), 0);
-        picture.translate((-PIXELS * (maxRowsLeft)), 0);
+        picture.translate((-PIXELS * (maxRowsLeft)), 0);*/
     }
 
-    public void setPicture(String pic){
+    public void setPicture(String pic) {
         picture.load(pic);
     }
 

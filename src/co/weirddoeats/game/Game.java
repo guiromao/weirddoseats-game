@@ -34,7 +34,7 @@ public class Game {
         timesDelivered = 0;
         ellapsedTime = TIME_STAGE_SECONDS;
         music = new Music();
-        positions = new GamePosition[2];
+        positions = new GamePosition[4];
         gameObjects = new GameObject[4];
         gameObjects[0] = (GameObject) this.player;
         gameObjects[1] = BuildingFactory.generateBuilding(gameGrid, level);
@@ -60,12 +60,14 @@ public class Game {
             if(i == 1){
                 gameObjects[3] = FoodFactory.generateFood(level, (Building) gameObjects[1], gameGrid);
                 gameObjects[1].getPosition().hide();
-                positions[0] = new GamePosition("food", gameObjects[3].getPosition());
+                positions[0] = new GamePosition("building", gameObjects[1].getPosition());
+                positions[2] = new GamePosition("food", gameObjects[3].getPosition());
             }
 
             if(i == 2){
                 goal = new Goal((Building) gameObjects[2], gameGrid);
-                positions[1] = new GamePosition("goal", goal.getPosition());
+                positions[1] = new GamePosition("building", gameObjects[2].getPosition());
+                positions[3] = new GamePosition("goal", goal.getPosition());
             }
         }
     }
@@ -101,6 +103,14 @@ public class Game {
         else {
             System.out.println("This wasn\'t an instance of Building.");
         }
+    }
+
+    public void pickFood(){
+        keyboard.pickedFood();
+    }
+
+    public void arrivedToGoal(){
+        keyboard.didGoal();
     }
 
     public void upgradeLevel() {

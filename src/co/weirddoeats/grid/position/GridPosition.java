@@ -1,5 +1,7 @@
 package co.weirddoeats.grid.position;
 
+import co.weirddoeats.game.Game;
+import co.weirddoeats.game.GamePosition;
 import co.weirddoeats.grid.GridColor;
 import co.weirddoeats.grid.GridDirection;
 
@@ -61,6 +63,8 @@ public interface GridPosition {
      * @param distance  the number of positions to move
      */
     public void moveInDirection(GridDirection direction, int distance);
+
+    public void moveInDirection(GridDirection direction, int distance, Game game, boolean isGoal);
 
     /**
      * Tests equality with another position

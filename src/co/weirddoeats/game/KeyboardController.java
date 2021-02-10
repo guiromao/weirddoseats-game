@@ -122,7 +122,7 @@ public class KeyboardController implements KeyboardHandler {
                             time.draw();
                             Thread.sleep(500);
                             timeLeft--;
-                            game.setTime(timeLeft);
+
                         }
                         if (countStages % Game.NUMBER_STAGES == 0) {
 
@@ -196,14 +196,14 @@ public class KeyboardController implements KeyboardHandler {
                             direction = GridDirection.RIGHT;
                             break;
                     }
-                    game.getPlayer().moveInDirection(direction);
-                    if(gotFood(game.getPlayer().getPosition()) && !isGoal){
+                    game.getPlayer().moveInDirection(direction, game, isGoal);
+                    /*if(gotFood(game.getPlayer().getPosition()) && !isGoal){
                         System.out.println("Player found food!");
                         pickedFood();
                     }
                     else if(arrivedGoal(game.getPlayer().getPosition()) && isGoal){
                         didGoal();
-                    }
+                    }*/
                 }
             }
         }
@@ -216,7 +216,7 @@ public class KeyboardController implements KeyboardHandler {
 
     public void didGoal(){
         game.getGameObjects()[2].getPosition().hide();
-        game.getGamePositions()[1].getPosition().hide();
+        game.getGamePositions()[3].getPosition().hide();
         game.generateNewCoordinates();
         game.getGameObjects()[1].getPosition().show();
         game.getGameObjects()[3].getPosition().show();
@@ -236,19 +236,19 @@ public class KeyboardController implements KeyboardHandler {
         game.getGameObjects()[1].getPosition().hide();
         game.getGameObjects()[3].getPosition().hide();
         game.getGameObjects()[2].getPosition().show();
-        game.getGamePositions()[1].getPosition().show();
+        game.getGamePositions()[3].getPosition().show();
         game.getMusic().playSound("powerup.wav");
         isGoal = true;
     }
 
     public boolean arrivedGoal(SimpleGfxGridPosition pos){
-        return (pos.getRow() == game.getGamePositions()[1].getPosition().getRow() &&
-                pos.getCol() == game.getGamePositions()[1].getPosition().getCol());
+        return (pos.getRow() == game.getGamePositions()[3].getPosition().getRow() &&
+                pos.getCol() == game.getGamePositions()[3].getPosition().getCol());
     }
 
     public boolean gotFood(SimpleGfxGridPosition pos){
-        return (pos.getRow() == game.getGamePositions()[0].getPosition().getRow() &&
-                pos.getCol() == game.getGamePositions()[0].getPosition().getCol());
+        return (pos.getRow() == game.getGamePositions()[2].getPosition().getRow() &&
+                pos.getCol() == game.getGamePositions()[2].getPosition().getCol());
     }
 
     public void playNextSong() {
