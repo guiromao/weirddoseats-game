@@ -20,6 +20,12 @@ public class Barrier {
 
     public void generatePositions(GameGrid grid) {
         position = grid.makeGridPosition();
+        if(0 == (int) Math.floor(Math.random()* 2)){
+            col = 5; row = 7;
+        }else{
+            col = 26; row = 10;
+        }
+        position.setPos(col, row);
     }
 
     public boolean plane(){
@@ -30,5 +36,6 @@ public class Barrier {
         }
         return horizontal;
     }
+
 
 }
