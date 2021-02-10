@@ -122,6 +122,7 @@ public class KeyboardController implements KeyboardHandler {
                             time.draw();
                             Thread.sleep(500);
                             timeLeft--;
+                            game.setTime(timeLeft);
                         }
                         if (countStages % Game.NUMBER_STAGES == 0) {
 

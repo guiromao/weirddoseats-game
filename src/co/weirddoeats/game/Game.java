@@ -15,7 +15,7 @@ public class Game {
     private final int HEIGHT = 16;
 
     private int level;
-    private int time;
+    private int ellapsedTime;
     private GameGrid gameGrid;
     private KeyboardController keyboard;
     private Background background;
@@ -32,7 +32,7 @@ public class Game {
         keyboard = new KeyboardController(this);
         level = 0;
         timesDelivered = 0;
-        time = TIME_STAGE_SECONDS;
+        ellapsedTime = TIME_STAGE_SECONDS;
         music = new Music();
         positions = new GamePosition[2];
         gameObjects = new GameObject[4];
@@ -129,7 +129,7 @@ public class Game {
     }
 
     public int getTime(){
-        return time;
+        return ellapsedTime;
     }
 
     public int getTimesDelivered(){
@@ -153,6 +153,6 @@ public class Game {
     }
 
     public void setTime(int seconds){
-        time = seconds;
+        ellapsedTime = seconds;
     }
 }
