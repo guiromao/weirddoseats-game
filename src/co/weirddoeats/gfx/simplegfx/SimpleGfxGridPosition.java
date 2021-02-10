@@ -142,8 +142,8 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         }
 
         setPos(getCol(), (getRow() - maxRowsUp));
-        rectangle.translate(0, (-PIXELS * (maxRowsUp)));
-        picture.translate(0, (-PIXELS * (maxRowsUp)));
+            rectangle.translate(0, (-PIXELS * (1)));
+            picture.translate(0, (-PIXELS * (1)));
     }
 
     public void moveDownRect(int dist){

@@ -29,6 +29,19 @@ public class Vehicle {
         return picture;
     }
 
+    public int getSpeed(){
+        return speed;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void levelUP(int level) {
+        this.speed = VehicleFactory.getSpeed(level);
+        this.name =  VehicleFactory.getVehicleTypes(level);
+    }
+
     public String getPictureString(){
         return pictureString;
     }
@@ -47,20 +60,12 @@ public class Vehicle {
         return position;
     }
 
-    public int getSpeed(){
-        return speed;
-    }
-
-
     public void setPosition(SimpleGfxGridPosition pos){
         position = pos;
     }
 
     public int getHeight(){
         return HEIGHT;
-    }
-    public String getName(){
-        return name;
     }
 
     public void setPicture(String picture){

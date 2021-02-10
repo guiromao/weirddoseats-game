@@ -27,7 +27,7 @@ public class Player extends GameObject {
         vehicle.getPosition().hide();
         isShown = false;
     }
-
+    //faz update na direcção e imagem correspondente
     public void moveInDirection(GridDirection direction){
         vehicle.setPicture(vehicle.getName() + "_" + direction.getDirection() + ".png");
         vehicle.getPosition().moveInDirection(direction, vehicle.getSpeed());
@@ -35,6 +35,9 @@ public class Player extends GameObject {
 
     public Vehicle getVehicle(){
         return vehicle;
+    }
+    public void levelUp(int level){
+        vehicle.levelUP(level);
     }
 
     public boolean isShown(){

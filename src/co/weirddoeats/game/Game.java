@@ -100,7 +100,7 @@ public class Game {
 
     public void upgradeLevel() {
         level++;
-
+        player.levelUp(level);
     }
 
     public Player getPlayer(){
