@@ -31,13 +31,13 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
 
         simpleGfxGrid = grid;
 
-        if (picture.contains("building")) {
+        /*if (picture.contains("building")) {
             this.picture = new Picture((getCol() - 3) * (PIXELS) + GameGrid.PADDING + 8, (getRow() - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-103, -100);
-        } else {
+        } else {*/
             this.picture = new Picture((getCol() - 4) * (PIXELS) + GameGrid.PADDING - 5, (getRow() - 4) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
             this.picture.grow(-120, -120);
-        }
+        //}
 
         rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING + GameGrid.PADDING + 0, getRow() * PIXELS + GameGrid.PADDING + GameGrid.INFO_BOARD_HEIGHT, PIXELS, PIXELS);
         rectangle.setColor(Color.WHITE);
@@ -69,8 +69,15 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
 
         //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
 
-        this.picture = new Picture((col - 4) * (PIXELS) + GameGrid.PADDING + 16, (row - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
-        this.picture.grow(-105, -105);
+        if (picture.contains("building")) {
+            this.picture = new Picture((getCol() - 3) * (PIXELS) + GameGrid.PADDING + 8, (getRow() - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture.grow(-103, -100);
+        }
+
+        else {
+            this.picture = new Picture((col - 4) * (PIXELS) + GameGrid.PADDING + 16, (row - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture.grow(-105, -105);
+        }
 
         setPos(col, row);
         hide();
@@ -155,11 +162,15 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
                 System.out.println("Passed by GOAL!");
                 game.arrivedToGoal();
             }
+            setPos(getCol() + moveCols, getRow());
+            rectangle.translate((PIXELS * moveCols), 0);
+            picture.translate((PIXELS * moveCols), 0);
         }
 
+        /*
         setPos(getCol() + moveCols, getRow());
         rectangle.translate((PIXELS * moveCols), 0);
-        picture.translate((PIXELS * moveCols), 0);
+        picture.translate((PIXELS * moveCols), 0);*/
     }
 
     public void checkVertically(int moveRows, Game game, boolean isGoal) {
