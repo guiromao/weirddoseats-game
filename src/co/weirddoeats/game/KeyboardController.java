@@ -16,9 +16,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class KeyboardController implements KeyboardHandler {
 
-    private final int TIME_STAGE_SECONDS = 10;
-    private final int NUMBER_STAGES = 3;
-
     private Keyboard keyboard;
     private Game game;
     private Text welcomeText;
@@ -36,7 +33,7 @@ public class KeyboardController implements KeyboardHandler {
         keyboard = new Keyboard(this);
         this.game= game;
         isOnWelcome = true;
-        timeLeft = TIME_STAGE_SECONDS;
+        timeLeft = game.getTime();
         countStages = 1;
         isGoal = false;
     }
@@ -126,10 +123,10 @@ public class KeyboardController implements KeyboardHandler {
                             Thread.sleep(500);
                             timeLeft--;
                         }
-                        if (countStages % NUMBER_STAGES == 0) {
+                        if (countStages % Game.NUMBER_STAGES == 0) {
 
                         }
-                        timeLeft = TIME_STAGE_SECONDS;
+                        timeLeft = game.getTime();
                         countStages++;
 
                     }
@@ -228,7 +225,7 @@ public class KeyboardController implements KeyboardHandler {
         int numberDelivered = game.getTimesDelivered() + 1;
         game.setTimesDelivered(numberDelivered);
 
-        if(numberDelivered % NUMBER_STAGES == 0){
+        if(numberDelivered % Game.NUMBER_STAGES == 0){
             game.upgradeLevel();
             updateLevel();
         }
