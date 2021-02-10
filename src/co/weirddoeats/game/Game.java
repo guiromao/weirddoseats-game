@@ -8,10 +8,14 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 
 public class Game {
 
+    public static final int TIME_STAGE_SECONDS = 10;
+    public static final int NUMBER_STAGES = 3;
     private final int PADDING = 10;
-    private final int WIDTH = 35;
-    private final int HEIGHT = 17;
+    private final int WIDTH = 36;
+    private final int HEIGHT = 16;
+
     private int level;
+    private int ellapsedTime;
     private GameGrid gameGrid;
     private KeyboardController keyboard;
     private Background background;
@@ -28,6 +32,7 @@ public class Game {
         keyboard = new KeyboardController(this);
         level = 0;
         timesDelivered = 0;
+        ellapsedTime = TIME_STAGE_SECONDS;
         music = new Music();
         positions = new GamePosition[2];
         gameObjects = new GameObject[4];
@@ -123,6 +128,10 @@ public class Game {
         return (level + 1);
     }
 
+    public int getTime(){
+        return ellapsedTime;
+    }
+
     public int getTimesDelivered(){
         return timesDelivered;
     }
@@ -141,5 +150,9 @@ public class Game {
 
     public void setTimesDelivered(int number){
         timesDelivered = number;
+    }
+
+    public void setTime(int seconds){
+        ellapsedTime = seconds;
     }
 }
