@@ -203,7 +203,7 @@ public class KeyboardController implements KeyboardHandler {
                     }
                     else if(arrivedGoal(game.getPlayer().getPosition()) && isGoal){
                         didGoal();
-                        updateScore(scoreDone);
+                        //updateScore(scoreDone);
                     }
                 }
             }
@@ -259,5 +259,7 @@ public class KeyboardController implements KeyboardHandler {
     public void setGame(Game g){
         game = g;
     }
+
+
 
 }
