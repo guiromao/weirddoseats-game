@@ -157,7 +157,7 @@ public class Game {
         int colPlayer = player.getVehicle().getPosition().getRow();
         int min = 2;
 
-        for(int i = min; i != (WIDTH - 1); i++){
+        for(int i = min; i != (WIDTH - 2); i++){
             if(colPlayer % i == 0){
                 return i;
             }
