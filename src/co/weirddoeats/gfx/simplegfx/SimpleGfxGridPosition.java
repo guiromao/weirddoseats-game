@@ -97,8 +97,8 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         rectangle.setColor(Color.WHITE);
 
         //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
-        this.picture = new Picture((col - 8) * (PIXELS) + GameGrid.PADDING + 3, (row - 6) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
-        this.picture.grow(-230, -170);
+        this.picture = new Picture((col - 6) * (PIXELS) , (row - 8) * PIXELS + 12 + GameGrid.INFO_BOARD_HEIGHT, picture);
+        this.picture.grow(-190, -190);
 
         setPos(col + 1, row);
         hide();

@@ -6,12 +6,12 @@ import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 
 public class Goal {
 
-    private final String PICTURE = "hungry.png";
+    private final String [] PICTURES = {"happygirl.png", "hungry.png", "hungry.png", "hungry.png", "hungry.png", "hungry.png"};
 
     private SimpleGfxGridPosition position;
 
-    public Goal(Building building, GameGrid grid){
-        position = grid.makeGridPosition(building.getPosition().getCol() + 1, building.getPosition().getRow(), PICTURE, true);
+    public Goal(Building building, GameGrid grid, int level){
+        position = grid.makeGridPosition(building.getPosition().getCol() + 1, building.getPosition().getRow(), PICTURES[level], true);
     }
 
     public SimpleGfxGridPosition getPosition(){
