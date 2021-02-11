@@ -1,5 +1,7 @@
 package co.weirddoeats.gfx.simplegfx;
 
+import co.weirddoeats.attributes.BackgroundFactory;
+import co.weirddoeats.attributes.InfoColor;
 import co.weirddoeats.grid.Grid;
 import co.weirddoeats.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -38,7 +40,7 @@ public class GameGrid implements Grid {
         infoBoard.setColor(Color.WHITE);
         infoBoard.fill();
 
-        background = new Picture(PADDING * 19 + 8, PADDING + INFO_BOARD_HEIGHT, "bg3.png");
+        background = new Picture(PADDING * 19 + 8, PADDING + INFO_BOARD_HEIGHT, BackgroundFactory.PICTURES[0]);
         background.grow(188, 0);
         background.delete();
 
@@ -134,6 +136,18 @@ public class GameGrid implements Grid {
 
     public Picture getBackground(){
         return background;
+    }
+
+    public void setInfoColor(Color color){
+        infoBoard.setColor(color);
+    }
+
+    public void setBackground(String picture){
+        background.delete();
+        background = new Picture(PADDING * 19 + 8, PADDING + INFO_BOARD_HEIGHT, picture);
+        background.grow(188, 0);
+        background.draw();
+
     }
 
     /**

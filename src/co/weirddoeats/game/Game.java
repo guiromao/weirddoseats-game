@@ -86,7 +86,7 @@ public class Game {
                 int row = generateRowRandom(2);
                 int col = generateColRandom(2);
 
-                if(row >= 1 && col>= 1 && row < (HEIGHT - 1) && col < (WIDTH - 2)){
+                if(row >= 1 && col>= 1 && row < (HEIGHT - 1) && col < (WIDTH - 4)){
                     String picture = ((Building) object).getImageName();
                     SimpleGfxGridPosition position = new SimpleGfxGridPosition(col, row, gameGrid, picture);
 
@@ -157,7 +157,7 @@ public class Game {
         int colPlayer = player.getVehicle().getPosition().getRow();
         int min = 2;
 
-        for(int i = min; i != (WIDTH - 2); i++){
+        for(int i = min; i != (WIDTH - 1); i++){
             if(colPlayer % i == 0){
                 return i;
             }
@@ -180,7 +180,7 @@ public class Game {
     public int generateColRandom(int denominator) {
         List<Integer> result = new ArrayList<>();
 
-        for (int i = denominator; i != (WIDTH - 1); i++) {
+        for (int i = denominator; i != (WIDTH - 2); i++) {
             if ((i + 1) % denominator == 0) {
                 result.add(i);
             }
@@ -198,8 +198,21 @@ public class Game {
     }
 
     public void upgradeLevel() {
-        level++;
-        player.levelUp(level);
+        if((level + 1) <= 6){
+            level++;
+            InfoColor infoColor = InfoColor.values()[level];
+            gameGrid.setInfoColor(infoColor.getColor());
+            gameGrid.setBackground(BackgroundFactory.PICTURES[level]);
+
+            getGameObjects()[2].getPosition().hide();
+            getGamePositions()[3].getPosition().hide();
+            generateNewCoordinates();
+            getGameObjects()[1].getPosition().show();
+            getGameObjects()[3].getPosition().show();
+            player.levelUp(level);
+            player.getVehicle().getPosition().hide();
+            player.getVehicle().getPosition().show();
+        }
     }
 
     public Player getPlayer() {

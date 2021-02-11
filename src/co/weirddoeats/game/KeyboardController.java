@@ -1,6 +1,7 @@
 package co.weirddoeats.game;
 
 import co.weirddoeats.attributes.GameObject;
+import co.weirddoeats.attributes.InfoColor;
 import co.weirddoeats.attributes.Music;
 import co.weirddoeats.gfx.simplegfx.GameGrid;
 import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
@@ -164,7 +165,7 @@ public class KeyboardController implements KeyboardHandler {
         if (isOnWelcome) {
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
                 game.setBoardColor(Color.WHITE);
-                game.setInfoColor(Color.BLACK);
+                game.setInfoColor(InfoColor.values()[0].getColor());
                 game.showBackground();
                 logo.delete();
                 welcomeText.delete();
@@ -216,13 +217,6 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public void didGoal(){
-        game.getGameObjects()[2].getPosition().hide();
-        game.getGamePositions()[3].getPosition().hide();
-        game.generateNewCoordinates();
-        game.getGameObjects()[1].getPosition().show();
-        game.getGameObjects()[3].getPosition().show();
-        game.getMusic().playSound("winsynth.wav");
-        isGoal = false;
 
         int numberDelivered = game.getTimesDelivered() + 1;
         game.setTimesDelivered(numberDelivered);
@@ -230,7 +224,18 @@ public class KeyboardController implements KeyboardHandler {
         if(numberDelivered % Game.NUMBER_STAGES == 0){
             game.upgradeLevel();
             updateLevel();
+            game.getMusic().playSound("levelup.mp3");
         }
+        else {
+            game.getMusic().playSound("wincoin.mp3");
+        }
+
+        isGoal = false;
+
+        game.getGameObjects()[2].getPosition().hide();
+        game.getGamePositions()[3].getPosition().hide();
+        game.getGameObjects()[1].getPosition().show();
+        game.getGameObjects()[3].getPosition().show();
     }
 
     public void pickedFood(){
@@ -238,7 +243,7 @@ public class KeyboardController implements KeyboardHandler {
         game.getGameObjects()[3].getPosition().hide();
         game.getGameObjects()[2].getPosition().show();
         game.getGamePositions()[3].getPosition().show();
-        game.getMusic().playSound("powerup.wav");
+        game.getMusic().playSound("tap.mp3");
         isGoal = true;
     }
 
