@@ -52,12 +52,12 @@ public class Game {
 
         int time = 10;
 
-        if (time == 0){
-            game.gameOver();
-        }
-        if (timesDelivered == 9){
-            game.gameWin();
-        }
+//        if (time == 0){
+//            game.gameOver();
+//        }
+//        if (timesDelivered == 9){
+//            game.gameWin();
+//        }
 
 
 
