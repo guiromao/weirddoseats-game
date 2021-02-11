@@ -37,6 +37,10 @@ public class Player extends GameObject {
         return vehicle;
     }
 
+    public void levelUp(int level){
+        vehicle.levelUP(level);
+    }
+
     public boolean isShown(){
         return isShown;
     }

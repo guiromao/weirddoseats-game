@@ -54,6 +54,8 @@ public class Game {
 
         generateNewCoordinates();
 
+        Thread.sleep(1000);
+
         int time = 10;
 
     }
@@ -81,41 +83,93 @@ public class Game {
         if (object instanceof Building) {
             while (!hasPos) {
                 int count = 0;
-                int row = generateRow();
-                int col = generateCol();
-                String picture = ((Building) object).getImageName();
-                SimpleGfxGridPosition position = new SimpleGfxGridPosition(col, row, gameGrid, picture);
+                int row = generateRowRandom(2);
+                int col = generateColRandom(2);
 
-                for (int i = 0; i != 3; i++) {
-                    GameObject newObject = gameObjects[i];
-                    if (newObject.getPosition() != null) {
-                        if (newObject.getPosition().getCol() != position.getCol()
-                                && newObject.getPosition().getRow() != position.getRow()) {
+                if(row >= 1 && col>= 1 && row < (HEIGHT - 1) && col < (WIDTH - 2)){
+                    String picture = ((Building) object).getImageName();
+                    SimpleGfxGridPosition position = new SimpleGfxGridPosition(col, row, gameGrid, picture);
+
+                    for (int i = 0; i != 3; i++) {
+                        GameObject newObject = gameObjects[i];
+                        if (newObject.getPosition() != null) {
+                            System.out.println("Comparing our Pos " + col + ", " + row + " with position " +
+                                    gameObjects[i].getPosition().getCol() + ", " + gameObjects[i].getPosition().getRow());
+                            if (newObject.getPosition().getCol() != position.getCol()
+                                    && newObject.getPosition().getRow() != position.getRow()) {
+                                count++;
+                            }
+                        } else {
                             count++;
                         }
+                    }
+                    if (count == 3) {
+                        hasPos = true;
+                        ((Building) object).setPosition(position);
+                        System.out.println("Generated positions Building. Col: " + object.getPosition().getCol() + ". Row: " + object.getPosition().getRow());
                     } else {
-                        count++;
+                        System.out.println("Did not get new coordinates for Building in loop. Looping again.");
                     }
                 }
-                if (count == 2) {
-                    hasPos = true;
-                    ((Building) object).setPosition(position);
-                    System.out.println("Generated positions Building. Col: " + object.getPosition().getCol() + ". Row: " + object.getPosition().getRow());
-                } else {
-                    System.out.println("Did not get new coordinates for Building in loop. Looping again.");
-                }
-
             }
         } else {
             System.out.println("This wasn\'t an instance of Building.");
         }
     }
 
-    public int generateRow() {
+    private int generateRow(){
+        int initRow = getDenominatorRow();
+        int realLevel = (level + 1) * 2;
+
+        for(int i = realLevel; i != 6; i++){
+            if(realLevel % i == 0 && initRow % i == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int generateCol(){
+        int initCol = getDenominatorCol();
+        int realLevel = (level + 1) * 2;
+
+        for(int i = realLevel; i != 6; i++){
+            if(realLevel % i == 0 && initCol % i == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int getDenominatorRow(){
+        int rowPlayer = player.getVehicle().getPosition().getRow();
+        int min = 2;
+
+        for(int i = min; i != (HEIGHT - 1); i++){
+            if(rowPlayer % i == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int getDenominatorCol(){
+        int colPlayer = player.getVehicle().getPosition().getRow();
+        int min = 2;
+
+        for(int i = min; i != (WIDTH - 1); i++){
+            if(colPlayer % i == 0){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int generateRowRandom(int denominator) {
         List<Integer> result = new ArrayList<>();
 
-        for (int i = 4; i != HEIGHT; i++) {
-            if (i % 4 == 0) {
+        for (int i = denominator; i != (HEIGHT - 1); i++) {
+            if (i % denominator == 0) {
                 result.add(i);
             }
         }
@@ -123,17 +177,16 @@ public class Game {
         return result.get((int) Math.floor(Math.random() * result.size()));
     }
 
-    public int generateCol() {
+    public int generateColRandom(int denominator) {
         List<Integer> result = new ArrayList<>();
 
-        for (int i = 4; i != WIDTH; i++) {
-            if (i % 4 == 0) {
+        for (int i = denominator; i != (WIDTH - 1); i++) {
+            if ((i + 1) % denominator == 0) {
                 result.add(i);
             }
         }
 
         return result.get((int) Math.floor(Math.random() * result.size()));
-
     }
 
     public void pickFood() {
@@ -146,7 +199,7 @@ public class Game {
 
     public void upgradeLevel() {
         level++;
-
+        player.levelUp(level);
     }
 
     public Player getPlayer() {
@@ -181,8 +234,16 @@ public class Game {
         return goal;
     }
 
+    public void updateTime(){
+        keyboard.updateInfo();
+    }
+
     public void setBoardColor(Color color) {
         gameGrid.getGameBoard().setColor(color);
+    }
+
+    public void showBackground(){
+        gameGrid.getBackground().draw();
     }
 
     public void setInfoColor(Color color) {

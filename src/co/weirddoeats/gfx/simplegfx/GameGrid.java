@@ -4,11 +4,12 @@ import co.weirddoeats.grid.Grid;
 import co.weirddoeats.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class GameGrid implements Grid {
 
     public static final int PADDING = 10;
-    public static final int INFO_BOARD_WIDTH = 35 * 30 + 25;
+    public static final int INFO_BOARD_WIDTH = 36 * 30 + 25;
     public static final int INFO_BOARD_HEIGHT = 80;
     public static final int PIXELS = 30;
 
@@ -16,7 +17,7 @@ public class GameGrid implements Grid {
     private int rows;
     private Rectangle gameBoard;
     private Rectangle infoBoard;
-    private Rectangle borderRectangle;
+    private Picture background;
 
     public GameGrid(int cols, int rows){
         this.cols = cols;
@@ -28,9 +29,6 @@ public class GameGrid implements Grid {
      */
     @Override
     public void init() {
-        /*borderRectangle = new Rectangle(PADDING, 0, cols*PIXELS, rows*PIXELS+25 + INFO_BOARD_HEIGHT);
-        borderRectangle.setColor(Color.BLACK);
-        borderRectangle.fill();*/
 
         gameBoard = new Rectangle(PADDING, PADDING + INFO_BOARD_HEIGHT, cols * PIXELS +25, rows * PIXELS + 20);
         gameBoard.setColor(Color.WHITE);
@@ -39,6 +37,11 @@ public class GameGrid implements Grid {
         infoBoard = new Rectangle(PADDING, PADDING, cols * PIXELS + 25, INFO_BOARD_HEIGHT);
         infoBoard.setColor(Color.WHITE);
         infoBoard.fill();
+
+        background = new Picture(PADDING * 19 + 8, PADDING + INFO_BOARD_HEIGHT, "bg3.png");
+        background.grow(188, 0);
+        background.delete();
+
     }
 
     /**
@@ -129,8 +132,8 @@ public class GameGrid implements Grid {
         return infoBoard;
     }
 
-    public Rectangle getBorderRectangle(){
-        return borderRectangle;
+    public Picture getBackground(){
+        return background;
     }
 
     /**

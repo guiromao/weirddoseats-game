@@ -67,7 +67,7 @@ public class KeyboardController implements KeyboardHandler {
 
         logo = new Picture();
         logo.load("logo.png");
-        logo.translate(300, -50);
+        logo.translate(320, -50);
         //logo.grow(-400, -400);
         logo.draw();
 
@@ -76,7 +76,7 @@ public class KeyboardController implements KeyboardHandler {
         welcomeText.grow(120, 10);
         //welcomeText.draw();
 
-        pressSpace = new Text(465, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
+        pressSpace = new Text(485, 265 + GameGrid.INFO_BOARD_HEIGHT, "Press <SPACE> to start the game! ;)");
         pressSpace.setColor(Color.BLACK);
         pressSpace.grow(120, 10);
         pressSpace.draw();
@@ -84,18 +84,18 @@ public class KeyboardController implements KeyboardHandler {
     }
 
     public void initAdditional() {
-        score = new Text(130, 40, "Score: 0");
+        score = new Text(130, 45, "Score: 0");
         score.setColor(Color.WHITE);
         score.grow(50, 20);
         score.draw();
 
-        time = new Text(510, 40, "");
+        time = new Text(510, 45, "");
         time.setColor(Color.WHITE);
         time.grow(50, 20);
         time.setText("Time: " + timeLeft);
         time.draw();
 
-        levelText = new Text(900, 40, "Level: " + game.getLevel());
+        levelText = new Text(900, 45, "Level: " + game.getLevel());
         levelText.setColor(Color.WHITE);
         levelText.grow(50, 20);
         levelText.draw();
@@ -115,7 +115,7 @@ public class KeyboardController implements KeyboardHandler {
                             }
                             time.delete();
                             Thread.sleep(500);
-                            time = new Text(510, 40, "");
+                            time = new Text(510, 45, "");
                             time.setColor(Color.WHITE);
                             time.grow(50, 20);
                             time.setText("Time: " + timeLeft);
@@ -142,7 +142,7 @@ public class KeyboardController implements KeyboardHandler {
 
     private void updateLevel(){
         levelText.delete();
-        levelText = new Text(900, 40, "");
+        levelText = new Text(900, 45, "");
         levelText.setColor(Color.WHITE);
         levelText.grow(50, 20);
         levelText.setText("Level: " + game.getLevel());
@@ -152,7 +152,7 @@ public class KeyboardController implements KeyboardHandler {
 
     public void updateScore(int scoreDone) {
         score.delete();
-        score = new Text(130, 40, "");
+        score = new Text(130, 45, "");
         score.setColor(Color.WHITE);
         score.grow(50, 20);
         score.setText("Score: " + scoreDone);
@@ -163,8 +163,9 @@ public class KeyboardController implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (isOnWelcome) {
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-                game.setBoardColor(Color.BLACK);
+                game.setBoardColor(Color.WHITE);
                 game.setInfoColor(Color.BLACK);
+                game.showBackground();
                 logo.delete();
                 welcomeText.delete();
                 pressSpace.delete();

@@ -24,6 +24,11 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
 
     public SimpleGfxGridPosition(GameGrid grid) {
         super((int) (Math.random() * grid.getCols()), (int) (Math.random() * grid.getRows()), grid);
+
+        simpleGfxGrid = grid;
+
+        rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING + GameGrid.PADDING + 0, getRow() * PIXELS + GameGrid.PADDING + GameGrid.INFO_BOARD_HEIGHT, PIXELS, PIXELS);
+        rectangle.setColor(Color.RED);
     }
 
     public SimpleGfxGridPosition(GameGrid grid, String picture) {
@@ -209,9 +214,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         }
 
         checkVertically((-maxRowsUp), game, isGoal);
-        /*setPos(getCol(), (getRow() - maxRowsUp));
-        rectangle.translate(0, (-PIXELS * (maxRowsUp)));
-        picture.translate(0, (-PIXELS * (maxRowsUp)));*/
+
     }
 
     public void moveDownRect(int dist, Game game, boolean isGoal) {
