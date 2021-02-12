@@ -8,17 +8,20 @@ import java.io.IOException;
 
 public class FileManager {
 
+    public static final String SCORE = "";
 
-    private String highScore(String file, int score) throws IOException {
+    private void highScore() {
 
+        try {
+            FileWriter writer = new FileWriter(SCORE);
+            BufferedWriter bWriter = new BufferedWriter(writer);
+            bWriter.write(SCORE);
+            bWriter.close();
 
-        FileWriter writer = new FileWriter(file);
-        BufferedWriter bWriter = new BufferedWriter(writer);
-
-        bWriter.write(score);
-
-        bWriter.close();
-
+        }catch(Exception ex){
+            String msg = ex.getMessage();
+            System.out.println("Exception " + msg);
+        }
     }
 
 

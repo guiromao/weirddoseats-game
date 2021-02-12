@@ -1,11 +1,14 @@
 package co.weirddoeats.game;
 
+import co.weirddoeats.attributes.GameObject;
 import co.weirddoeats.gfx.simplegfx.GameGrid;
 import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 
-public class Barrier {
+import java.util.List;
 
-    private SimpleGfxGridPosition position;
+public class Barrier extends GameObject {
+
+    private List<SimpleGfxGridPosition> positions;
     private boolean horizontal;
     private int col;
     private int row;
@@ -19,6 +22,7 @@ public class Barrier {
     }
 
     public void generatePositions(GameGrid grid) {
+<<<<<<< HEAD
         position = grid.makeGridPosition();
         if(0 == (int) Math.floor(Math.random()* 2)){
             col = 5; row = 7;
@@ -26,6 +30,9 @@ public class Barrier {
             col = 26; row = 10;
         }
         position.setPos(col, row);
+=======
+        positions.add(grid.makeGridPosition());
+>>>>>>> b808ef685c552c15d953f23c6aecf18546037244
     }
 
     public boolean plane(){
@@ -37,5 +44,12 @@ public class Barrier {
         return horizontal;
     }
 
+<<<<<<< HEAD
 
+=======
+    @Override
+    public SimpleGfxGridPosition getPosition() {
+        return null;
+    }
+>>>>>>> b808ef685c552c15d953f23c6aecf18546037244
 }
