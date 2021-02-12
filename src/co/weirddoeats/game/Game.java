@@ -54,6 +54,15 @@ public class Game {
 
         generateNewCoordinates();
 
+        int time = 10;
+
+//        if (time == 0){
+//            game.gameOver();
+//        }
+//        if (timesDelivered == 9){
+//            game.gameWin();
+//        }
+
     }
 
     public void generateNewCoordinates() {

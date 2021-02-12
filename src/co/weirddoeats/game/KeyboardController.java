@@ -212,10 +212,15 @@ public class KeyboardController implements KeyboardHandler {
                     }
                     else if(arrivedGoal(game.getPlayer().getPosition()) && isGoal){
                         didGoal();
+<<<<<<< HEAD
                     }*/
 
                     //updateScore(scoreDone);
-                }
+
+                        //updateScore(scoreDone);
+                    }
+
+
             }
         }
     }

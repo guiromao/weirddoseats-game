@@ -24,13 +24,11 @@ public class Barrier extends GameObject {
     public void generatePositions(GameGrid grid) {
 
         positions.add(grid.makeGridPosition());
-
         if(0 == (int) Math.floor(Math.random()* 2)){
             col = 5; row = 7;
         }else{
             col = 26; row = 10;
         }
-
     }
 
     public boolean plane(){
@@ -47,5 +45,4 @@ public class Barrier extends GameObject {
     public SimpleGfxGridPosition getPosition() {
         return null;
     }
-
 }
