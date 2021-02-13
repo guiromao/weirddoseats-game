@@ -54,8 +54,6 @@ public class Game {
 
         generateNewCoordinates();
 
-        Thread.sleep(1000);
-
         int time = 10;
 
 //        if (time == 0){
@@ -64,8 +62,6 @@ public class Game {
 //        if (timesDelivered == 9){
 //            game.gameWin();
 //        }
-
-
 
     }
 
@@ -80,7 +76,7 @@ public class Game {
             }
 
             if (i == 2) {
-                goal = new Goal((Building) gameObjects[2], gameGrid);
+                goal = new Goal((Building) gameObjects[2], gameGrid, level);
                 positions[1] = new GamePosition("building", gameObjects[2].getPosition());
                 positions[3] = new GamePosition("goal", goal.getPosition());
             }
@@ -115,6 +111,7 @@ public class Game {
                     if (count == 3) {
                         hasPos = true;
                         ((Building) object).setPosition(position);
+                        ((Building) object).getPosition().hide();
                         System.out.println("Generated positions Building. Col: " + object.getPosition().getCol() + ". Row: " + object.getPosition().getRow());
                     } else {
                         System.out.println("Did not get new coordinates for Building in loop. Looping again.");
@@ -124,6 +121,10 @@ public class Game {
         } else {
             System.out.println("This wasn\'t an instance of Building.");
         }
+    }
+
+    private void updateInfo(){
+        keyboard.updateInfo();
     }
 
     private int generateRow(){
@@ -198,6 +199,10 @@ public class Game {
         return result.get((int) Math.floor(Math.random() * result.size()));
     }
 
+    public int getInitialTime(){
+        return (TIME_STAGE_SECONDS - (level));
+    }
+
     public void pickFood() {
         keyboard.pickedFood();
     }
@@ -207,7 +212,7 @@ public class Game {
     }
 
     public void upgradeLevel() {
-        if((level + 1) <= 6){
+        if((level + 1) < 6){
             level++;
             InfoColor infoColor = InfoColor.values()[level];
             gameGrid.setInfoColor(infoColor.getColor());
@@ -216,12 +221,20 @@ public class Game {
             getGameObjects()[2].getPosition().hide();
             getGamePositions()[3].getPosition().hide();
             generateNewCoordinates();
-            getGameObjects()[1].getPosition().show();
+            getGameObjects()[1].getPosition().hide();
             getGameObjects()[3].getPosition().show();
             player.levelUp(level);
             player.getVehicle().getPosition().hide();
             player.getVehicle().getPosition().show();
         }
+
+        else if(timesDelivered == NUMBER_STAGES * level){
+            gameWin();
+        }
+    }
+
+    public void gameWin(){
+        keyboard.gameWin();
     }
 
     public Player getPlayer() {

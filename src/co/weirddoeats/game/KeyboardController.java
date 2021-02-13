@@ -32,7 +32,7 @@ public class KeyboardController implements KeyboardHandler {
 
     public KeyboardController(Game game) {
         keyboard = new Keyboard(this);
-        this.game= game;
+        this.game = game;
         isOnWelcome = true;
         timeLeft = game.getTime();
         countStages = 1;
@@ -108,7 +108,7 @@ public class KeyboardController implements KeyboardHandler {
             public void run() {
                 try {
 
-                    while(true){
+                    while (true) {
 
                         while (timeLeft >= 0) {
                             if (time != null) {
@@ -124,13 +124,15 @@ public class KeyboardController implements KeyboardHandler {
                             Thread.sleep(500);
                             timeLeft--;
 
+                            if(timeLeft == 0){
+                                gameOver();
+                            }
                         }
                         if (countStages % Game.NUMBER_STAGES == 0) {
 
                         }
                         timeLeft = game.getTime();
                         countStages++;
-
                     }
 
                 } catch (InterruptedException v) {
@@ -141,7 +143,11 @@ public class KeyboardController implements KeyboardHandler {
         }.start();
     }
 
-    private void updateLevel(){
+    private void gameOver(){
+
+    }
+
+    private void updateLevel() {
         levelText.delete();
         levelText = new Text(900, 45, "");
         levelText.setColor(Color.WHITE);
@@ -158,6 +164,7 @@ public class KeyboardController implements KeyboardHandler {
         score.grow(50, 20);
         score.setText("Score: " + scoreDone);
         score.draw();
+        game.getPlayer().setScore(scoreDone);
     }
 
     @Override
@@ -175,13 +182,13 @@ public class KeyboardController implements KeyboardHandler {
                 initAdditional();
                 game.getPlayer().getVehicle().getPosition().show();
                 updateInfo();
-                game.getGameObjects()[1].getPosition().show();
+                game.getGameObjects()[1].getPosition().hide();
                 game.getGameObjects()[3].getPosition().show();
 
             }
         } else if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP || keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN ||
                 keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT || keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-            if (game.getPlayer()!= null) {
+            if (game.getPlayer() != null) {
                 if (true) {
                     GridDirection direction = null;
                     switch (keyboardEvent.getKey()) {
@@ -206,12 +213,20 @@ public class KeyboardController implements KeyboardHandler {
                     else if(arrivedGoal(game.getPlayer().getPosition()) && isGoal){
                         didGoal();
 <<<<<<< HEAD
+<<<<<<< HEAD
                         //updateScore(scoreDone);
                     }
 =======
                     }*/
->>>>>>> b808ef685c552c15d953f23c6aecf18546037244
-                }
+
+
+
+
+                    //updateScore(scoreDone);
+
+                        //updateScore(scoreDone);
+                    }
+
             }
         }
     }
@@ -221,43 +236,55 @@ public class KeyboardController implements KeyboardHandler {
 
     }
 
-    public void didGoal(){
+    public void gameWin(){
+        game.getGameObjects()[2].getPosition().hide();
+        game.getGamePositions()[3].getPosition().hide();
+        game.getGameObjects()[1].getPosition().hide();
+        game.getGameObjects()[3].getPosition().hide();
+    }
+
+    public void didGoal() {
 
         int numberDelivered = game.getTimesDelivered() + 1;
         game.setTimesDelivered(numberDelivered);
 
-        if(numberDelivered % Game.NUMBER_STAGES == 0){
+        if (numberDelivered % Game.NUMBER_STAGES == 0) {
             game.upgradeLevel();
             updateLevel();
             game.getMusic().playSound("levelup.mp3");
-        }
-        else {
+        } else {
             game.getMusic().playSound("wincoin.mp3");
+
+            game.getGameObjects()[2].getPosition().hide();
+            game.getGamePositions()[3].getPosition().hide();
+            game.generateNewCoordinates();
+            game.getGameObjects()[1].getPosition().hide();
+            game.getGameObjects()[3].getPosition().show();
         }
 
         isGoal = false;
 
-        game.getGameObjects()[2].getPosition().hide();
-        game.getGamePositions()[3].getPosition().hide();
-        game.getGameObjects()[1].getPosition().show();
-        game.getGameObjects()[3].getPosition().show();
+        updateScore(game.getPlayer().getScore() + (game.getLevel() * 100 + (50 * timeLeft)));
+
+        timeLeft = game.getInitialTime();
+
     }
 
-    public void pickedFood(){
+    public void pickedFood() {
         game.getGameObjects()[1].getPosition().hide();
         game.getGameObjects()[3].getPosition().hide();
-        game.getGameObjects()[2].getPosition().show();
+        game.getGameObjects()[2].getPosition().hide();
         game.getGamePositions()[3].getPosition().show();
         game.getMusic().playSound("tap.mp3");
         isGoal = true;
     }
 
-    public boolean arrivedGoal(SimpleGfxGridPosition pos){
+    public boolean arrivedGoal(SimpleGfxGridPosition pos) {
         return (pos.getRow() == game.getGamePositions()[3].getPosition().getRow() &&
                 pos.getCol() == game.getGamePositions()[3].getPosition().getCol());
     }
 
-    public boolean gotFood(SimpleGfxGridPosition pos){
+    public boolean gotFood(SimpleGfxGridPosition pos) {
         return (pos.getRow() == game.getGamePositions()[2].getPosition().getRow() &&
                 pos.getCol() == game.getGamePositions()[2].getPosition().getCol());
     }
@@ -266,10 +293,9 @@ public class KeyboardController implements KeyboardHandler {
         game.getMusic().playNextSong();
     }
 
-    public void setGame(Game g){
+    public void setGame(Game g) {
         game = g;
     }
-
 
 
 }

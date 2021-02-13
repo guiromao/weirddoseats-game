@@ -33,6 +33,10 @@ public class Player extends GameObject {
         vehicle.getPosition().moveInDirection(direction, vehicle.getSpeed(), game, isGoal);
     }
 
+    public int getScore(){
+        return score;
+    }
+
     public Vehicle getVehicle(){
         return vehicle;
     }

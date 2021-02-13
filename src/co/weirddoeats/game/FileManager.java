@@ -1,10 +1,6 @@
 package co.weirddoeats.game;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class FileManager {
 
@@ -21,6 +17,17 @@ public class FileManager {
         }catch(Exception ex){
             String msg = ex.getMessage();
             System.out.println("Exception " + msg);
+        }
+    }
+
+    public int readScore(){
+        int result = 0;
+
+        try{
+            FileReader reader = new FileReader(FILENAME);
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
         }
     }
 
