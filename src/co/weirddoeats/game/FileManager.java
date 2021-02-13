@@ -8,14 +8,14 @@ import java.io.IOException;
 
 public class FileManager {
 
-    public static final String SCORE = "";
+    public static final String FILENAME = "highscore.txt";
 
-    private void highScore() {
+    public void writeScore(int score) {
 
         try {
-            FileWriter writer = new FileWriter(SCORE);
+            FileWriter writer = new FileWriter(FILENAME);
             BufferedWriter bWriter = new BufferedWriter(writer);
-            bWriter.write(SCORE);
+            bWriter.write(score);
             bWriter.close();
 
         }catch(Exception ex){
