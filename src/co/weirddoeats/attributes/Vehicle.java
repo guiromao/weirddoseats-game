@@ -64,6 +64,10 @@ public class Vehicle {
         position = pos;
     }
 
+    public void setSpeed(int n){
+        speed = n;
+    }
+
     public int getHeight(){
         return HEIGHT;
     }

@@ -54,15 +54,11 @@ public class Music {
 
     public void playNextSong() {
         stop();
-        MusicType[] songs = MusicType.values();
-        int songsLength = songs.length;
-
-        play(songs[songIndex].getSong());
-
-        if (songIndex < (songsLength - 1)) {
+        if(songIndex < (MusicType.values().length)){
+            MusicType[] songs = MusicType.values();
+            play(songs[songIndex].getSong());
             songIndex++;
         }
-
     }
 
     public void playSound(String sound){

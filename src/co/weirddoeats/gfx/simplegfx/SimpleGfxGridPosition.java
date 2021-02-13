@@ -151,7 +151,11 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         return ((col == pos.getCol() && row == pos.getRow()) || (col - 1 == pos.getCol() && row == pos.getRow()) ||
                 (col+1 == pos.getCol() && row == pos.getRow()) || (col == pos.getCol() && row + 1 == pos.getRow()) ||
                 (col == pos.getCol() && row-1 == pos.getRow()) || (col -1 == pos.getCol() && row-1 == pos.getRow()) ||
-                (col + 1 == pos.getCol() && row + 1 == pos.getRow()));
+                (col + 1 == pos.getCol() && row + 1 == pos.getRow()) ||
+                (col - 2 == pos.getCol() && row == pos.getRow()) ||
+                (col + 2 == pos.getCol() && row == pos.getRow()) ||
+                (col == pos.getCol() && row - 2 == pos.getRow()) ||
+                (col == pos.getCol() && row + 2 == pos.getRow()));
     }
 
     public void checkHorizontally(int moveCols, Game game, boolean isGoal) {

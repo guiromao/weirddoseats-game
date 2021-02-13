@@ -138,6 +138,10 @@ public class GameGrid implements Grid {
         return background;
     }
 
+    public void setBackgroundColor(Color color){
+        gameBoard.setColor(color);
+    }
+
     public void setInfoColor(Color color){
         infoBoard.setColor(color);
     }
@@ -147,7 +151,6 @@ public class GameGrid implements Grid {
         background = new Picture(PADDING * 19 + 8, PADDING + INFO_BOARD_HEIGHT, picture);
         background.grow(188, 0);
         background.draw();
-
     }
 
     /**
