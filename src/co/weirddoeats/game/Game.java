@@ -111,6 +111,7 @@ public class Game {
                     if (count == 3) {
                         hasPos = true;
                         ((Building) object).setPosition(position);
+                        ((Building) object).getPosition().hide();
                         System.out.println("Generated positions Building. Col: " + object.getPosition().getCol() + ". Row: " + object.getPosition().getRow());
                     } else {
                         System.out.println("Did not get new coordinates for Building in loop. Looping again.");
@@ -220,7 +221,7 @@ public class Game {
             getGameObjects()[2].getPosition().hide();
             getGamePositions()[3].getPosition().hide();
             generateNewCoordinates();
-            getGameObjects()[1].getPosition().show();
+            getGameObjects()[1].getPosition().hide();
             getGameObjects()[3].getPosition().show();
             player.levelUp(level);
             player.getVehicle().getPosition().hide();

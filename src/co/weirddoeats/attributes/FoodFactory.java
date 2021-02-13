@@ -6,7 +6,7 @@ import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 public class FoodFactory {
 
     private static final String [] name = {"sandwiches", "prawns à guilho", "steak, rice, chips and egg", "sushi", "chef dish", "astronaut food"};
-    private static final String [] pictures = {"doughnut.png", "bowl.png", "bowl.png", "bowl.png", "bowl.png", "bowl.png"};
+    private static final String [] pictures = {"doughnut.png", "gambas.png", "pizza.png", "sushi.png", "author.png", "astronautfood.png"};
 
     public static Food generateFood(int level, Building building, GameGrid grid){
 

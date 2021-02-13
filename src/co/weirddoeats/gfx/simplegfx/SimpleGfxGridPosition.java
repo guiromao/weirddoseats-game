@@ -80,8 +80,8 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         }
 
         else {
-            this.picture = new Picture((col - 4) * (PIXELS) + GameGrid.PADDING + 16, (row - 3) * PIXELS - 10 + GameGrid.INFO_BOARD_HEIGHT, picture);
-            this.picture.grow(-105, -105);
+            this.picture = new Picture((col - 4) * (PIXELS) + GameGrid.PADDING + 5, (row - 3) * PIXELS - 2 + GameGrid.INFO_BOARD_HEIGHT, picture);
+            this.picture.grow(-95, -95);
         }
 
         setPos(col, row);
@@ -97,8 +97,8 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         rectangle.setColor(Color.WHITE);
 
         //rectangle = new Rectangle(getCol() * PIXELS + GameGrid.PADDING, getRow() * PIXELS + GameGrid.PADDING, PIXELS, PIXELS);
-        this.picture = new Picture((col - 6) * (PIXELS) , (row - 8) * PIXELS + 12 + GameGrid.INFO_BOARD_HEIGHT, picture);
-        this.picture.grow(-190, -190);
+        this.picture = new Picture((col - 6) * (PIXELS) , (row - 8) * PIXELS + 5 + GameGrid.INFO_BOARD_HEIGHT , picture);
+        this.picture.grow(-195, -195);
 
         setPos(col + 1, row);
         hide();
@@ -109,7 +109,7 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
      */
     @Override
     public void show() {
-        rectangle.draw();
+        //rectangle.draw();
         picture.draw();
     }
 
@@ -147,6 +147,13 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
         System.out.println("Moved to Row: " + getRow() + ". And Col: " + getCol() + ". Width: " + picture.getWidth() + ". Height: " + picture.getHeight());
     }
 
+    public boolean isAround(int col, int row, SimpleGfxGridPosition pos){
+        return ((col == pos.getCol() && row == pos.getRow()) || (col - 1 == pos.getCol() && row == pos.getRow()) ||
+                (col+1 == pos.getCol() && row == pos.getRow()) || (col == pos.getCol() && row + 1 == pos.getRow()) ||
+                (col == pos.getCol() && row-1 == pos.getRow()) || (col -1 == pos.getCol() && row-1 == pos.getRow()) ||
+                (col + 1 == pos.getCol() && row + 1 == pos.getRow()));
+    }
+
     public void checkHorizontally(int moveCols, Game game, boolean isGoal) {
 
         GamePosition[] positions = game.getGamePositions();
@@ -157,13 +164,16 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
 
             if (!isGoal) {
 
+                /*
                 if ((getCol() + i) == positions[2].getPosition().getCol()
-                        && (getRow()) == positions[2].getPosition().getRow()) {
+                        && (getRow()) == positions[2].getPosition().getRow())*/
+                if(isAround(getCol() + i, getRow(), positions[2].getPosition())){
                     System.out.println("Passed by FOOD!");
                     game.pickFood();
                 }
-            } else if ((getCol() + i) == positions[3].getPosition().getCol()
-                    && (getRow()) == positions[3].getPosition().getRow()) {
+            } else /*if ((getCol() + i) == positions[3].getPosition().getCol()
+                    && (getRow()) == positions[3].getPosition().getRow()) */
+                if(isAround(getCol() + i, getRow(), positions[3].getPosition())){
                 System.out.println("Passed by GOAL!");
                 game.arrivedToGoal();
             }
@@ -187,13 +197,11 @@ public class SimpleGfxGridPosition extends AbstractGridPosition {
                     positions[2].getPosition().getRow());
             if (!isGoal) {
 
-                if ((getCol()) == positions[2].getPosition().getCol()
-                        && (getRow() + i) == positions[2].getPosition().getRow()) {
+                if (isAround(getCol(), getRow() + i, positions[2].getPosition())) {
                     System.out.println("Passed by FOOD!");
                     game.pickFood();
                 }
-            } else if ((getCol()) == positions[3].getPosition().getCol()
-                    && (getRow() + i) == positions[3].getPosition().getRow()) {
+            } else if (isAround(getCol(), getRow() + i, positions[3].getPosition())) {
                 System.out.println("Passed by GOAL!");
                 game.arrivedToGoal();
             }

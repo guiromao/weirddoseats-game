@@ -182,7 +182,7 @@ public class KeyboardController implements KeyboardHandler {
                 initAdditional();
                 game.getPlayer().getVehicle().getPosition().show();
                 updateInfo();
-                game.getGameObjects()[1].getPosition().show();
+                game.getGameObjects()[1].getPosition().hide();
                 game.getGameObjects()[3].getPosition().show();
 
             }
@@ -252,14 +252,13 @@ public class KeyboardController implements KeyboardHandler {
             game.getGameObjects()[2].getPosition().hide();
             game.getGamePositions()[3].getPosition().hide();
             game.generateNewCoordinates();
-            game.getGameObjects()[1].getPosition().show();
+            game.getGameObjects()[1].getPosition().hide();
             game.getGameObjects()[3].getPosition().show();
         }
 
         isGoal = false;
 
-        updateScore(game.getPlayer().getScore() + (game.getLevel() * 100 + (50 * (Game.TIME_STAGE_SECONDS -
-                (Game.TIME_STAGE_SECONDS - game.getTime())))));
+        updateScore(game.getPlayer().getScore() + (game.getLevel() * 100 + (50 * timeLeft)));
 
         timeLeft = game.getInitialTime();
 
@@ -268,7 +267,7 @@ public class KeyboardController implements KeyboardHandler {
     public void pickedFood() {
         game.getGameObjects()[1].getPosition().hide();
         game.getGameObjects()[3].getPosition().hide();
-        game.getGameObjects()[2].getPosition().show();
+        game.getGameObjects()[2].getPosition().hide();
         game.getGamePositions()[3].getPosition().show();
         game.getMusic().playSound("tap.mp3");
         isGoal = true;

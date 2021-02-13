@@ -6,7 +6,7 @@ import co.weirddoeats.gfx.simplegfx.SimpleGfxGridPosition;
 
 public class Goal {
 
-    private final String [] PICTURES = {"happygirl.png", "hungry.png", "hungry.png", "hungry.png", "hungry.png", "hungry.png"};
+    private final String [] PICTURES = {"happygirl.png", "hungry.png", "businesswoman.png", "genesimmons3.png", "daftpunk.png", "astronaut.png"};
 
     private SimpleGfxGridPosition position;
 
